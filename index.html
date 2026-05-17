@@ -1,92 +1,278 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaSuite - Next-Gen AI & Tech Tools</title>
+    <title>NovaSuite - AI & Automation Hub</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #151b2c;
+            --primary: #8b5cf6;
+            --primary-hover: #7c3aed;
+            --success: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border: #222c44;
         }
+
         body {
-            background-color: #0b0f19;
-            color: #f3f4f6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            margin: 0;
             padding: 20px;
         }
+
         .container {
-            max-width: 600px;
-            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .logo {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-        }
-        h1 {
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: #9ca3af;
+
+        header {
+            text-align: center;
             margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
         }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 2.8rem;
+            margin: 0 0 10px 0;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .main-layout { grid-template-columns: 1fr; }
+        }
+
         .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background-color: var(--bg-card);
             border-radius: 16px;
-            padding: 40px 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
         }
-        .status-badge {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-            padding: 6px 16px;
-            border-radius: 99px;
-            font-size: 0.85rem;
-            font-weight: 600;
+
+        .card h2 {
+            margin-top: 0;
             margin-bottom: 20px;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            font-size: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        p {
-            color: #d1d5db;
+
+        /* AI Chat Interface */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 350px;
+            background-color: var(--bg-main);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            padding: 10px 14px;
+            border-radius: 8px;
+            max-width: 80%;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .message.system {
+            background-color: var(--border);
+            color: var(--text-main);
+            align-self: flex-start;
+        }
+
+        .message.user {
+            background-color: var(--primary);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 10px;
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border);
+            gap: 10px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border);
+            padding: 10px;
+            border-radius: 8px;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .chat-input-area button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .chat-input-area button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Automation Panel */
+        .automation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .auto-item {
+            background-color: var(--bg-main);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .auto-info h3 {
+            margin: 0 0 5px 0;
             font-size: 1.1rem;
-            line-height: 1.6;
         }
-        .footer {
-            margin-top: 60px;
+
+        .auto-info p {
+            margin: 0;
             font-size: 0.85rem;
-            color: #4b5563;
+            color: var(--text-muted);
+        }
+
+        .status-badge {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="logo">NovaSuite</div>
-        <h1>Next-Gen AI & Financial Tools Hub</h1>
-        
+<div class="container">
+    <header>
+        <h1>NovaSuite</h1>
+        <p>מרכז הפיתוח לבינה מלאכותית ואוטומציות מתקדמות</p>
+    </header>
+
+    <div class="main-layout">
         <div class="card">
-            <div class="status-badge">System Status: Deploying Hub</div>
-            <p>We are currently configuring our automated AI insights and professional tech suite. Something massive is coming very soon.</p>
+            <h2>🤖 עוזר AI מובנה - Nova Prompt</h2>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message system">שלום! אני ממודל ה-AI של NovaSuite. איך אני יכול לעזור לך לייעל את תהליכי העבודה היום?</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="userInput" placeholder="הקלד הודעה לפיתוח ה-AI..." onkeypress="handleKeyPress(event)">
+                    <button onclick="sendMessage()">שלח</button>
+                </div>
+            </div>
         </div>
-        
-        <div class="footer">
-            &copy; 2026 NovaSuite. All rights reserved.
+
+        <div class="card">
+            <h2>⚙️ בוטים ותהליכים אוטומטיים</h2>
+            <div class="automation-list">
+                <div class="auto-item">
+                    <div class="auto-info">
+                        <h3>סורק נתונים אוטומטי</h3>
+                        <p>מנתח ומסנכרן מידע רשת בזמן אמת לתוך המערכת</p>
+                    </div>
+                    <span class="status-badge">פעיל</span>
+                </div>
+
+                <div class="auto-item">
+                    <div class="auto-info">
+                        <h3>מחולל תובנות בינה מלאכותית</h3>
+                        <p>מפיק דוחות ומסמכים אוטומטיים בלחיצת כפתור</p>
+                    </div>
+                    <span class="status-badge">פעיל</span>
+                </div>
+
+                <div class="auto-item">
+                    <div class="auto-info">
+                        <h3>בוט אינטגרציה ומעקב</h3>
+                        <p>מנהל תזמונים וסטטוסים של קבצים ומערכות</p>
+                    </div>
+                    <span class="status-badge" style="background-color: rgba(156, 163, 175, 0.1); color: var(--text-muted);">בהמתנה</span>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+
+<script>
+function sendMessage() {
+    const input = document.getElementById('userInput');
+    const messageText = input.value.trim();
+    if (messageText === '') return;
+
+    const chatMessages = document.getElementById('chatMessages');
+
+    // הודעת משתמש
+    const userMessage = document.createElement('div');
+    userMessage.className = 'message user';
+    userMessage.innerText = messageText;
+    chatMessages.appendChild(userMessage);
+
+    input.value = '';
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // תגובת דמו אוטומטית מהמערכת
+    setTimeout(() => {
+        const systemMessage = document.createElement('div');
+        systemMessage.className = 'message system';
+        systemMessage.innerText = "הפקודה התקבלה בנובה! פונקציית ה-AI מעבדת את הבקשה שלך ומסנכרנת את נתוני האוטומציה.";
+        chatMessages.appendChild(systemMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1000);
+}
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+}
+</script>
 
 </body>
 </html>
