@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaSuite Integrated Matrix</title>
+    <title>NovaSuite Global Language Matrix v4.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
             --bg-deep: #05070f;
@@ -20,70 +24,319 @@
             --border-color: #1e293b;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Assistant', sans-serif; }
         body { background-color: var(--bg-deep); color: var(--text-body); padding: 20px; }
-        .workspace { max-width: 1500px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+        .workspace { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
 
-        /* Header UI */
+        /* Title Header */
         .matrix-header {
-            background: linear-gradient(135deg, var(--bg-surface) 0%, #12162b 100%);
+            background: linear-gradient(135deg, var(--bg-surface) 0%, #111632 100%);
             border: 1px solid var(--border-color);
-            padding: 20px 25px;
-            border-radius: 12px;
+            padding: 20px 30px;
+            border-radius: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
-        .matrix-header h1 { font-size: 1.7rem; color: var(--text-heading); font-weight: 800; }
-        .matrix-header p { color: var(--text-muted); font-size: 0.85rem; margin-top: 3px; }
-        .status-badge { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
-
-        /* Multi-Grid Architecture */
-        .matrix-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
-        .span-12 { grid-column: span 12; }
-        .span-7 { grid-column: span 7; }
-        .span-5 { grid-column: span 5; }
-        .span-6 { grid-column: span 6; }
-
-        /* Panel Standard UI */
-        .matrix-panel { background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
-        .panel-title { font-size: 1.1rem; font-weight: 700; color: var(--text-heading); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-
-        /* Input Elements */
-        .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
-        .field-box { display: flex; flex-direction: column; gap: 5px; }
-        .field-box label { font-size: 0.78rem; color: var(--text-muted); }
+        .matrix-title h1 { font-size: 26px; font-weight: 700; color: var(--text-heading); }
+        .matrix-title h1 span { color: var(--primary); font-family: 'Space Grotesk', sans-serif; }
         
-        input, select, button { background-color: var(--bg-field); border: 1px solid var(--border-color); color: var(--text-heading); padding: 10px 12px; border-radius: 6px; font-size: 0.88rem; outline: none; text-align: right; }
-        input:focus, select:focus { border-color: var(--primary); }
+        /* Language Selector Hub */
+        .lang-selector-hub {
+            display: flex;
+            gap: 15px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .lang-btn {
+            background: var(--bg-field);
+            border: 2px solid var(--border-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover, .lang-btn.active {
+            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Main Game Box */
+        .game-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-field);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .hearts { color: var(--accent-red); font-size: 20px; display: flex; gap: 5px; }
+        .progress-bar { flex: 1; margin: 0 25px; height: 12px; background-color: #1e293b; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; width: 0%; background-color: var(--accent-green); transition: width 0.3s; }
         
-        button.btn-core { background-color: var(--primary); color: white; border: none; font-weight: 600; cursor: pointer; transition: background 0.2s; text-align: center; }
-        button.btn-core:hover { background-color: var(--primary-hover); }
-        button.btn-green { background-color: var(--accent-green); border: none; }
-        button.btn-green:hover { background-color: #059669; }
+        .question-display {
+            background: var(--bg-field);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+        .q-label { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; font-weight: bold; }
+        .q-text { font-size: 24px; font-weight: 700; color: white; }
 
-        /* Module Launcher Cards */
-        .modules-display { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-        .module-card { background-color: var(--bg-field); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; position: relative; }
-        .module-card h4 { font-size: 0.95rem; color: var(--primary); margin-bottom: 5px; }
-        .module-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.3; margin-bottom: 10px; }
-        .module-card a { font-size: 0.8rem; color: var(--accent-green); text-decoration: none; font-weight: 600; display: inline-block; }
-
-        /* Custom Charts & Analytics */
-        .chart-box { background-color: var(--bg-field); border: 1px solid var(--border-color); border-radius: 8px; height: 220px; position: relative; overflow: hidden; }
-        canvas { width: 100%; height: 100%; display: block; }
+        .slots-area { display: flex; justify-content: center; gap: 10px; min-height: 60px; border-bottom: 2px dashed var(--border-color); padding-bottom: 10px; flex-wrap: wrap; align-items: center; }
+        .word-bank { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 15px; }
         
-        .stats-banner { display: flex; gap: 15px; background-color: var(--bg-field); padding: 12px; border-radius: 6px; border: 1px solid var(--border-color); }
-        .stat-tile { display: flex; flex-direction: column; }
-        .stat-tile span { font-size: 0.72rem; color: var(--text-muted); }
-        .stat-tile strong { font-size: 1.1rem; }
+        .word-chip {
+            background-color: var(--bg-surface);
+            border: 2px solid var(--border-color);
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.2s;
+            user-select: none;
+            box-shadow: 0 4px 0 var(--border-color);
+        }
+        .word-chip:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .word-chip.disabled { opacity: 0.25; pointer-events: none; box-shadow: none; transform: translateY(4px); }
 
-        /* Logs & Tables */
-        .table-area { overflow-x: auto; background-color: var(--bg-field); border-radius: 6px; border: 1px solid var(--border-color); max-height: 150px; }
-        table { width: 100%; border-collapse: collapse; text-align: right; font-size: 0.8rem; }
-        th, td { padding: 8px 12px; border-bottom: 1px solid var(--border-color); }
-        th { background-color: rgba(255,255,255,0.02); color: var(--text-muted); }
+        .action-panel { padding: 20px; border-radius: 12px; display: none; font-weight: 700; justify-content: space-between; align-items: center; }
+        .action-panel.correct { display: flex; background-color: rgba(16, 185, 129, 0.15); border: 1px solid var(--accent-green); color: var(--accent-green); }
+        .action-panel.wrong { display: flex; background-color: rgba(239, 68, 68, 0.15); border: 1px solid var(--accent-red); color: var(--accent-red); }
+        
+        .btn-action {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-action:hover { background-color: var(--primary-hover); }
+    </style>
+</head>
+<body>
 
-        /* Language Trainer Box */
-        .quiz-card { background-color: var(--bg-field); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; text-align: center; }
-        .quiz-word { font-size: 1.6
+<div class="workspace">
+    <header class="matrix-header">
+        <div class="matrix-title">
+            <h1>NovaSuite <span>Global Language Matrix v4.0</span></h1>
+        </div>
+        <div style="font-size: 14px; color: var(--accent-green); font-weight: bold;">פלטפורמת למידה עולמית פתוחה</div>
+    </header>
+
+    <nav class="lang-selector-hub">
+        <button class="lang-btn active" onclick="switchTrack('he_en')">🇮🇱 ➔ 🇺🇸 עברית לאנגלית</button>
+        <button class="lang-btn" onclick="switchTrack('ar_en')">🇹🇳 ➔ 🇺🇸 العربية إلى الإنجليزية</button>
+        <button class="lang-btn" onclick="switchTrack('en_fr')">🇺🇸 ➔ 🇫🇷 English to French</button>
+    </nav>
+
+    <main class="game-card">
+        <div class="game-stats">
+            <div class="hearts" id="heartsHub">❤️❤️❤️</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFillBar"></div>
+            </div>
+            <div style="font-weight: bold; font-family: 'Space Grotesk'; color: var(--primary);" id="progressLabel">Task 1/3</div>
+        </div>
+
+        <div class="question-display">
+            <div class="q-label" id="trackInstructions">תרגם את המשפט לאנגלית:</div>
+            <div class="q-text" id="targetQuestion">טוען נתונים...</div>
+        </div>
+
+        <div class="slots-area" id="slotsArea"></div>
+        <div class="word-bank" id="wordBankArea"></div>
+
+        <div class="action-panel" id="actionPanel">
+            <span id="actionFeedbackText">סטטוס תשובה</span>
+            <button class="btn-action" onclick="processUserAction()" id="actionControlBtn">בדוק תשובה</button>
+        </div>
+    </main>
+</div>
+
+<script>
+    // מאגר השפות הבינלאומי המלא של הפלטפורמה שלך
+    const globalDatabase = {
+        he_en: {
+            instructions: "תרגם את המשפט לאנגלית:",
+            lessons: [
+                { q: "אני בונה פלטפורמה עולמית", a: ["I", "build", "a", "global", "platform"], bank: ["I", "build", "a", "global", "platform", "market", "trade", "the"] },
+                { q: "ניהול סיכונים חיוני להצלחה", a: ["Risk", "management", "is", "essential", "for", "success"], bank: ["Risk", "management", "is", "essential", "for", "success", "volatile", "buy"] }
+            ]
+        },
+        ar_en: {
+            instructions: "ترجم الجملة إلى الإنجليزية:",
+            lessons: [
+                { q: "أنا أتحكم في حساب التداول الخاص بي", a: ["I", "control", "my", "trading", "account"], bank: ["I", "control", "my", "trading", "account", "volatile", "platform", "sell"] },
+                { q: "المستقبل שייך למערכות עצמאיות", a: ["The", "future", "belongs", "to", "independent", "systems"], bank: ["The", "future", "belongs", "to", "independent", "systems", "trade", "risk"] }
+            ]
+        },
+        en_fr: {
+            instructions: "Translate the sentence to French:",
+            lessons: [
+                { q: "The stock market is open", a: ["Le", "marché", "boursier", "est", "ouvert"], bank: ["Le", "marché", "boursier", "est", "ouvert", "la", "banque", "système"] },
+                { q: "I love professional tools", a: ["J'adore", "les", "outils", "professionnels"], bank: ["J'adore", "les", "outils", "professionnels", "le", "リスク", "trading"] }
+            ]
+        }
+    };
+
+    let currentTrack = 'he_en';
+    let currentLessonIdx = 0;
+    let userSelection = [];
+    let userLives = 3;
+    let isStageEvaluated = false;
+
+    function startMatrixEngine() {
+        const track = globalDatabase[currentTrack];
+        const lessons = track.lessons;
+
+        if (currentLessonIdx >= lessons.length) {
+            document.getElementById('targetQuestion').innerText = "🎉 קו הידע הושלם בהצלחה! / تم إكمال المسار بنجاح!";
+            document.getElementById('slotsArea').innerHTML = "המערכת עודכנה בריבונות מלאה.";
+            document.getElementById('wordBankArea').innerHTML = "";
+            document.getElementById('actionPanel').style.display = "none";
+            document.getElementById('progressFillBar').style.width = "100%";
+            return;
+        }
+
+        const currentLesson = lessons[currentLessonIdx];
+        document.getElementById('trackInstructions').innerText = track.instructions;
+        document.getElementById('targetQuestion').innerText = currentLesson.q;
+        document.getElementById('progressLabel').innerText = `Task ${currentLessonIdx + 1}/${lessons.length}`;
+        document.getElementById('progressFillBar').style.width = `${(currentLessonIdx / lessons.length) * 100}%`;
+        
+        userSelection = [];
+        isStageEvaluated = false;
+        document.getElementById('slotsArea').innerHTML = "";
+        document.getElementById('actionPanel').className = "action-panel";
+        document.getElementById('actionPanel').style.display = "flex";
+        document.getElementById('actionControlBtn').innerText = "בדוק תשובה";
+        
+        const bankArea = document.getElementById('wordBankArea');
+        bankArea.innerHTML = "";
+        
+        const mixedBank = [...currentLesson.bank].sort(() => Math.random() - 0.5);
+        
+        mixedBank.forEach((word, idx) => {
+            const chip = document.createElement('div');
+            chip.className = 'word-chip';
+            chip.innerText = word;
+            chip.setAttribute('data-word', word);
+            chip.setAttribute('data-idx', idx);
+            chip.onclick = () => pushWordToSlot(chip);
+            bankArea.appendChild(chip);
+        });
+        renderLivesUI();
+    }
+
+    function pushWordToSlot(chip) {
+        if (isStageEvaluated) return;
+        chip.classList.add('disabled');
+        
+        const word = chip.getAttribute('data-word');
+        const idx = chip.getAttribute('data-idx');
+        
+        const slotChip = document.createElement('div');
+        slotChip.className = 'word-chip';
+        slotChip.innerText = word;
+        
+        slotChip.onclick = () => {
+            if (isStageEvaluated) return;
+            chip.classList.remove('disabled');
+            slotChip.remove();
+            userSelection = userSelection.filter(item => item.word !== word || item.idx !== idx);
+        };
+        
+        document.getElementById('slotsArea').appendChild(slotChip);
+        userSelection.push({ word: word, idx: idx });
+    }
+
+    function processUserAction() {
+        if (!isStageEvaluated) {
+            evaluateSubmission();
+        } else {
+            currentLessonIdx++;
+            startMatrixEngine();
+        }
+    }
+
+    function evaluateSubmission() {
+        const correctSequence = globalDatabase[currentTrack].lessons[currentLessonIdx].a;
+        const userSequence = userSelection.map(item => item.word);
+        
+        const isMatch = correctSequence.length === userSequence.length && correctSequence.every((val, i) => val === userSequence[i]);
+        const panel = document.getElementById('actionPanel');
+        const feedback = document.getElementById('actionFeedbackText');
+        
+        if (isMatch) {
+            panel.classList.add('correct');
+            feedback.innerText = "מצוין! התשובה נכונה. / إجابة صحيحة ممتازة!";
+        } else {
+            panel.classList.add('wrong');
+            feedback.innerText = `טעות. התשובה: ${correctSequence.join(' ')}`;
+            userLives--;
+            renderLivesUI();
+        }
+        
+        isStageEvaluated = true;
+        document.getElementById('actionControlBtn').innerText = "המשך / متابعة";
+        
+        if (userLives <= 0) {
+            alert("החיים נגמרו! מתחלל מחדש.");
+            userLives = 3;
+            currentLessonIdx = 0;
+            startMatrixEngine();
+        }
+    }
+
+    function renderLivesUI() {
+        let text = "";
+        for (let i = 0; i < 3; i++) {
+            text += i < userLives ? "❤️" : "🖤";
+        }
+        document.getElementById('heartsHub').innerText = text;
+    }
+
+    function switchTrack(trackKey) {
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        currentTrack = trackKey;
+        currentLessonIdx = 0;
+        userLives = 3;
+        startMatrixEngine();
+    }
+
+    // הפעלה אוטומטית ברקע
+    startMatrixEngine();
+</script>
+
+</body>
+</html>
