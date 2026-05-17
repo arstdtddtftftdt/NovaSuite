@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaSuite Sovereign Core</title>
+    <title>NovaSuite Integrated Matrix</title>
     <style>
         :root {
             --bg-deep: #05070f;
@@ -21,38 +21,69 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background-color: var(--bg-deep); color: var(--text-body); padding: 25px; }
-        .workspace { max-width: 1400px; margin: 0 auto; }
+        body { background-color: var(--bg-deep); color: var(--text-body); padding: 20px; }
+        .workspace { max-width: 1500px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
 
-        /* Header Style */
-        .premium-header {
+        /* Header UI */
+        .matrix-header {
             background: linear-gradient(135deg, var(--bg-surface) 0%, #12162b 100%);
             border: 1px solid var(--border-color);
-            padding: 20px 30px;
-            border-radius: 14px;
-            margin-bottom: 25px;
+            padding: 20px 25px;
+            border-radius: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .brand-title h1 { font-size: 1.8rem; color: var(--text-heading); font-weight: 800; }
-        .brand-title p { color: var(--text-muted); font-size: 0.9rem; margin-top: 2px; }
-        .system-badge { background: rgba(139, 92, 246, 0.1); border: 1px solid var(--primary); color: var(--primary); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .matrix-header h1 { font-size: 1.7rem; color: var(--text-heading); font-weight: 800; }
+        .matrix-header p { color: var(--text-muted); font-size: 0.85rem; margin-top: 3px; }
+        .status-badge { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
 
-        /* Grid Layout */
-        .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
-        .panel-full { grid-column: span 12; }
-        .panel-7 { grid-column: span 7; }
-        .panel-5 { grid-column: span 5; }
-        @media (max-width: 1024px) { .panel-7, .panel-5 { grid-column: span 12; } }
+        /* Multi-Grid Architecture */
+        .matrix-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+        .span-12 { grid-column: span 12; }
+        .span-7 { grid-column: span 7; }
+        .span-5 { grid-column: span 5; }
+        .span-6 { grid-column: span 6; }
 
-        /* Panel UI */
-        .matrix-panel { background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; }
-        .panel-header { font-size: 1.15rem; font-weight: 700; color: var(--text-heading); margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
+        /* Panel Standard UI */
+        .matrix-panel { background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .panel-title { font-size: 1.1rem; font-weight: 700; color: var(--text-heading); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; display: flex; align-items: center; gap: 8px; }
 
-        /* Controls */
-        .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 15px; }
-        .field-group { display: flex; flex-direction: column; gap: 5px; }
-        .field-group label { font-size: 0.8rem; color: var(--text-muted); }
+        /* Input Elements */
+        .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+        .field-box { display: flex; flex-direction: column; gap: 5px; }
+        .field-box label { font-size: 0.78rem; color: var(--text-muted); }
         
-        input, select, button { background-color: var(--bg-field); border: 1px solid var(--border-color); color: var(--text-heading); padding: 10px 14px; border-radius: 8px; font-size:
+        input, select, button { background-color: var(--bg-field); border: 1px solid var(--border-color); color: var(--text-heading); padding: 10px 12px; border-radius: 6px; font-size: 0.88rem; outline: none; text-align: right; }
+        input:focus, select:focus { border-color: var(--primary); }
+        
+        button.btn-core { background-color: var(--primary); color: white; border: none; font-weight: 600; cursor: pointer; transition: background 0.2s; text-align: center; }
+        button.btn-core:hover { background-color: var(--primary-hover); }
+        button.btn-green { background-color: var(--accent-green); border: none; }
+        button.btn-green:hover { background-color: #059669; }
+
+        /* Module Launcher Cards */
+        .modules-display { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+        .module-card { background-color: var(--bg-field); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; position: relative; }
+        .module-card h4 { font-size: 0.95rem; color: var(--primary); margin-bottom: 5px; }
+        .module-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.3; margin-bottom: 10px; }
+        .module-card a { font-size: 0.8rem; color: var(--accent-green); text-decoration: none; font-weight: 600; display: inline-block; }
+
+        /* Custom Charts & Analytics */
+        .chart-box { background-color: var(--bg-field); border: 1px solid var(--border-color); border-radius: 8px; height: 220px; position: relative; overflow: hidden; }
+        canvas { width: 100%; height: 100%; display: block; }
+        
+        .stats-banner { display: flex; gap: 15px; background-color: var(--bg-field); padding: 12px; border-radius: 6px; border: 1px solid var(--border-color); }
+        .stat-tile { display: flex; flex-direction: column; }
+        .stat-tile span { font-size: 0.72rem; color: var(--text-muted); }
+        .stat-tile strong { font-size: 1.1rem; }
+
+        /* Logs & Tables */
+        .table-area { overflow-x: auto; background-color: var(--bg-field); border-radius: 6px; border: 1px solid var(--border-color); max-height: 150px; }
+        table { width: 100%; border-collapse: collapse; text-align: right; font-size: 0.8rem; }
+        th, td { padding: 8px 12px; border-bottom: 1px solid var(--border-color); }
+        th { background-color: rgba(255,255,255,0.02); color: var(--text-muted); }
+
+        /* Language Trainer Box */
+        .quiz-card { background-color: var(--bg-field); border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; text-align: center; }
+        .quiz-word { font-size: 1.6
