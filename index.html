@@ -231,4 +231,180 @@
     </section>
 
     <div class="utility-layout">
-        <div class="panel-
+        <div class="panel-box">
+            <h2>🧮 סימולטור אסטרטגיה וניהול הון</h2>
+            <div style="margin-top:10px;">
+                <input type="number" id="simBal" value="50000" class="input-ctrl" placeholder="גודל הון ($)">
+                <input type="number" id="simRisk" value="1" step="0.1" class="input-ctrl" placeholder="סיכון מוגדר (%)">
+                <input type="number" id="simSl" value="20" class="input-ctrl" placeholder="עצירת הפסד (נקודות)">
+                <button class="btn-action" onclick="calcSizer()">בצע חישוב סיכון</button>
+            </div>
+            <div id="sizerOutput" style="margin-top:15px; padding:12px; background:#060913; border-radius:6px; display:none; border:1px solid var(--border);">
+                <p style="font-size:0.9rem; margin-bottom:5px;">• הפסד כספי מותר: <strong id="outRiskCash"></strong></p>
+                <p style="font-size:0.9rem;">• כמות חוזים מקסימלית (MNQ): <strong id="outContractsMax" style="color:var(--success);"></strong></p>
+            </div>
+        </div>
+
+        <div class="panel-box">
+            <h2>💳 מרכז תשלומים וסליקה גלובלית</h2>
+            <div style="margin-top:10px;">
+                <select id="payPlan" class="input-ctrl" style="height:41px;">
+                    <option value="99">תוכנית בסיסית - $99/חודש</option>
+                    <option value="249">תוכנית מקצוענית - $249/חודש</option>
+                </select>
+                <button class="btn-action" style="background:var(--accent-gold);" onclick="openModal('modalPayment')">מעבר לעמוד סליקה</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalAuth">
+    <div class="modal-frame">
+        <button class="modal-close" onclick="closeModal('modalAuth')">X</button>
+        <h3 class="modal-title">🔐 בקרת גישה – NovaSuite Authentication</h3>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">הזן מפתח גישה אישי למערכת:</p>
+        <input type="text" placeholder="שם משתמש..." class="input-ctrl">
+        <input type="password" placeholder="קוד גישה מאובטח..." class="input-ctrl">
+        <button class="btn-action" onclick="alert('הגישה אושרה בהצלחה!'); closeModal('modalAuth');">התחבר למערכת</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalGoogle">
+    <div class="modal-frame">
+        <button class="modal-close" onclick="closeModal('modalGoogle')">X</button>
+        <h3 class="modal-title">🌐 Google Global Lookup Interface</h3>
+        <input type="text" placeholder="הקלד ביטוי לחיפוש..." class="input-ctrl" id="gSearch">
+        <button class="btn-action" onclick="window.open('https://www.google.com/search?q=' + encodeURIComponent(document.getElementById('gSearch').value), '_blank')">חפש ברשת</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalGPT">
+    <div class="modal-frame">
+        <button class="modal-close" onclick="closeModal('modalGPT')">X</button>
+        <h3 class="modal-title">🤖 ChatGPT Pro Terminal Connection</h3>
+        <div style="background:rgba(0,0,0,0.4); padding:12px; border-radius:6px; height:120px; font-size:0.85rem; overflow-y:auto; border:1px solid var(--border); margin-bottom:12px; color:var(--primary);">
+            [SYSTEM]: API Connected. Ready for optimization vectors...
+        </div>
+        <input type="text" placeholder="הקלד הנחיה או שאילתת קוד..." class="input-ctrl">
+        <button class="btn-action" onclick="alert('הפקודה נשלחה לעיבוד במטריצה.');">שדר פקודה</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalMidjourney">
+    <div class="modal-frame">
+        <button class="modal-close" onclick="closeModal('modalMidjourney')">X</button>
+        <h3 class="modal-title">🎨 Midjourney Neural Visualizer</h3>
+        <input type="text" placeholder="הזן תיאור פרומפט לעיצוב (English)..." class="input-ctrl">
+        <button class="btn-action" onclick="alert('מחולל התמונות הופעל ברקע.');">בצע רנדור</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalTV">
+    <div class="modal-frame" style="max-width:850px;">
+        <button class="modal-close" onclick="closeModal('modalTV')">X</button>
+        <h3 class="modal-title">📊 גרף NASDAQ (MNQ1!) חי ומובנה</h3>
+        <div style="width:100%; height:400px; overflow:hidden; border-radius:8px; border:1px solid var(--border);">
+            <iframe src="https://s.tradingview.com/widgetembed/?symbol=CME_MINI%3AMNQ1!&interval=5&theme=dark&style=1&timezone=Exchange" style="width:100%; height:100%; border:none;"></iframe>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalTopstep">
+    <div class="modal-frame">
+        <button class="modal-close" onclick="closeModal('modalTopstep')">X</button>
+        <h3 class="modal-title">🏆 Topstep Institutional Target Evaluation</h3>
+        <div style="background:rgba(0,0,0,0.2); padding:15px; border-radius:8px; border:1px solid var(--border); margin-bottom:15px; font-size:0.9rem;">
+            <p>• יעד רווח נוכחי לאתגר: <span style="color:var(--success); font-weight:bold;">$3,000</span></p>
+            <p style="margin-top:5px;">• חסם הפסד יומי מקסימלי: <span style="color:var(--danger); font-weight:bold;">$1,000</span></p>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:15px;">המערכת מנטרת את נתוני החשבון המקומיים שלך בהתאם לחוקי ה-Prop Firm.</p>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalBinance">
+    <div class="modal-frame">
+        <button class="modal-close" onclick="closeModal('modalBinance')">X</button>
+        <h3 class="modal-title">🪙 Binance Crypto P2P Manager</h3>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:10px;">חשב שערי המרה מהירים מדולר לסימולציות משיכה:</p>
+        <input type="number" id="usdAmount" placeholder="סכום בדולר ($)..." class="input-ctrl">
+        <button class="btn-action" onclick="document.getElementById('cryptoOut').innerText = 'שווי משוער לחשבון: ' + (parseFloat(document.getElementById('usdAmount').value) || 0) + ' USDT';">בצע חישוב המרה</button>
+        <div id="cryptoOut" style="color:var(--success); font-weight:bold; margin-top:12px;"></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalFiverr">
+    <div class="modal-frame">
+        <button class="modal-close" onclick="closeModal('modalFiverr')">X</button>
+        <h3 class="modal-title">💼 Fiverr Freelance Matrix Output</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">אין עבודות או פרויקטים פתוחים הממתינים לאישור ברקע המערכת.</p>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalYouTube">
+    <div class="modal-frame">
+        <button class="modal-close" onclick="closeModal('modalYouTube')">X</button>
+        <h3 class="modal-title">📺 YouTube Knowledge Hub</h3>
+        <input type="text" placeholder="חפש הדרכות טכניות או סקירות שוק..." class="input-ctrl">
+        <button class="btn-action" onclick="alert('הפלייליסט הלימודי נטען למטריצה.');">טען מידע</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalDuolingo">
+    <div class="modal-frame">
+        <button class="modal-close" onclick="closeModal('modalDuolingo')">X</button>
+        <h3 class="modal-title">🦉 Duolingo Vocabulary Training Module</h3>
+        <div style="background:rgba(0,0,0,0.2); padding:15px; border-radius:8px; border:1px solid var(--border); font-size:0.9rem;">
+            <p>• בסיס נתונים אישי: <strong style="color:var(--primary);">מעל 3,200 מילים ממופות</strong></p>
+            <p style="margin-top:5px;">• מעקב רצף יומי (Streak Tracking): <span style="color:var(--success);">פעיל ומסונכרן</span></p>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalGithub">
+    <div class="modal-frame">
+        <button class="modal-close" onclick="closeModal('modalGithub')">X</button>
+        <h3 class="modal-title">📦 GitHub Cloud Control Terminal</h3>
+        <div style="color:var(--success); font-weight:bold; font-size:0.95rem;">• STATUS: ALL SYSTEM REPOS ARE SYNCED WITH MASTER CORE</div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalPayment">
+    <div class="modal-frame">
+        <button class="modal-close" onclick="closeModal('modalPayment')">X</button>
+        <h3 class="modal-title">💳 עמוד תשלום וסליקה מאובטח</h3>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">מערכת הדמיית סליקה מאובטחת לנעילת חשבון:</p>
+        <input type="text" placeholder="שם בעל הכרטיס..." class="input-ctrl">
+        <input type="text" placeholder="מספר כרטיס אשראי גלובלי..." class="input-ctrl">
+        <button class="btn-action" style="background:var(--success); color:#000;" onclick="alert('הפעולה עברה בהצלחה! החשבון עודכן לסטטוס מאובטח.'); closeModal('modalPayment');">אשר העברת תשלום</button>
+    </div>
+</div>
+
+<script>
+    function openModal(id) {
+        var modal = document.getElementById(id);
+        if (modal) { modal.classList.add('active'); }
+    }
+    function closeModal(id) {
+        var modal = document.getElementById(id);
+        if (modal) { modal.classList.remove('active'); }
+    }
+
+    function calcSizer() {
+        const bal = parseFloat(document.getElementById('simBal').value);
+        const risk = parseFloat(document.getElementById('simRisk').value);
+        const sl = parseFloat(document.getElementById('simSl').value);
+
+        if(isNaN(bal) || isNaN(risk) || isNaN(sl) || sl <= 0) return;
+
+        const cashRisk = bal * (risk / 100);
+        const contractRisk = sl * 2; // MNQ Contract Factor Multiplier
+        const totalContracts = cashRisk / contractRisk;
+
+        document.getElementById('outRiskCash').innerText = "$" + cashRisk.toFixed(2);
+        document.getElementById('outContractsMax').innerText = totalContracts.toFixed(2) + " Contracts";
+        document.getElementById('sizerOutput').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
