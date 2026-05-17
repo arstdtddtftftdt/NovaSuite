@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" id="htmlTag">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaSuite - AI & Automation Hub</title>
+    <title>NovaSuite - Global AI & Automation Hub</title>
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -29,30 +29,23 @@
             margin: 0 auto;
         }
 
-        /* Language Switcher Navbar */
-        .lang-switcher {
+        /* Top Bar with Google Translate */
+        .top-bar {
             display: flex;
             justify-content: flex-end;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .lang-btn {
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 10px;
             background-color: var(--bg-card);
             border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: bold;
-            transition: all 0.2s;
+            border-radius: 12px;
         }
 
-        .lang-btn:hover, .lang-btn.active {
-            background-color: var(--primary);
-            border-color: var(--primary);
-            color: white;
+        .global-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: bold;
         }
 
         header {
@@ -129,13 +122,16 @@
             max-width: 80%;
             font-size: 0.95rem;
             line-height: 1.4;
+            background-color: var(--border);
+            color: var(--text-main);
+            align-self: flex-start;
         }
 
-        /* Handles alignment dynamically based on dir attribute */
-        html[dir="ltr"] .message.system { align-self: flex-start; background-color: var(--border); }
-        html[dir="ltr"] .message.user { align-self: flex-end; background-color: var(--primary); color: white; }
-        html[dir="rtl"] .message.system { align-self: flex-start; background-color: var(--border); }
-        html[dir="rtl"] .message.user { align-self: flex-end; background-color: var(--primary); color: white; }
+        .message.user {
+            background-color: var(--primary);
+            color: white;
+            align-self: flex-end;
+        }
 
         .chat-input-area {
             display: flex;
@@ -205,162 +201,96 @@
             font-size: 0.8rem;
             font-weight: bold;
         }
+
+        /* Google Translate Styling Customization */
+        .goog-te-gadget-simple {
+            background-color: var(--bg-main) !important;
+            border: 1px solid var(--border) !important;
+            padding: 6px 10px !important;
+            border-radius: 6px !important;
+            font-family: inherit !important;
+        }
+        .goog-te-gadget-simple span {
+            color: var(--text-main) !important;
+        }
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+        body {
+            top: 0px !important;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="lang-switcher">
-        <button class="lang-btn active" onclick="setLanguage('en')">English</button>
-        <button class="lang-btn" onclick="setLanguage('fr')">Français</button>
-        <button class="lang-btn" onclick="setLanguage('he')">עברית</button>
+    <div class="top-bar">
+        <span class="global-text">🌐 Select Language / اختر اللغة:</span>
+        <div id="google_translate_element"></div>
     </div>
 
     <header>
-        <h1 id="mainTitle">NovaSuite</h1>
-        <p id="mainSubtitle">Advanced AI & Automation Development Hub</p>
+        <h1>NovaSuite</h1>
+        <p>Global AI & Automation Development Hub</p>
     </header>
 
     <div class="main-layout">
         <div class="card">
-            <h2 id="chatCardTitle">🤖 Built-in AI Assistant - Nova Prompt</h2>
+            <h2>🤖 Built-in AI Assistant - Nova Prompt</h2>
             <div class="chat-container">
                 <div class="chat-messages" id="chatMessages">
-                    <div class="message system" id="welcomeMsg">Hello! I am the NovaSuite AI model. How can I help optimize your workflows today?</div>
+                    <div class="message system">Hello! I am the NovaSuite AI model. How can I help optimize your workflows today?</div>
                 </div>
                 <div class="chat-input-area">
                     <input type="text" id="userInput" placeholder="Type a message for AI development..." onkeypress="handleKeyPress(event)">
-                    <button onclick="sendMessage()" id="sendBtn">Send</button>
+                    <button onclick="sendMessage()">Send</button>
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <h2 id="autoCardTitle">⚙️ Automated Bots & Workflows</h2>
+            <h2>⚙️ Automated Bots & Workflows</h2>
             <div class="automation-list">
                 <div class="auto-item">
                     <div class="auto-info">
-                        <h3 id="bot1Title">Automated Data Scraper</h3>
-                        <p id="bot1Desc">Analyzes and syncs real-time web data into the system</p>
+                        <h3>Automated Data Scraper</h3>
+                        <p>Analyzes and syncs real-time web data into the system</p>
                     </div>
-                    <span class="status-badge" id="badgeActive1">Active</span>
+                    <span class="status-badge">Active</span>
                 </div>
 
                 <div class="auto-item">
                     <div class="auto-info">
-                        <h3 id="bot2Title">AI Insights Generator</h3>
-                        <p id="bot2Desc">Generates automated reports and documents instantly</p>
+                        <h3>AI Insights Generator</h3>
+                        <p>Generates automated reports and documents instantly</p>
                     </div>
-                    <span class="status-badge" id="badgeActive2">Active</span>
+                    <span class="status-badge">Active</span>
                 </div>
 
                 <div class="auto-item">
                     <div class="auto-info">
-                        <h3 id="bot3Title">Integration & Tracking Bot</h3>
-                        <p id="bot3Desc">Manages schedules, file synchronization, and system states</p>
+                        <h3>Integration & Tracking Bot</h3>
+                        <p>Manages schedules, file synchronization, and system states</p>
                     </div>
-                    <span class="status-badge" id="badgePending" style="background-color: rgba(156, 163, 175, 0.1); color: var(--text-muted);">Pending</span>
+                    <span class="status-badge" style="background-color: rgba(156, 163, 175, 0.1); color: var(--text-muted);">Pending</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-// Language Translations Dictionary
-const translations = {
-    en: {
-        dir: "ltr",
-        subtitle: "Advanced AI & Automation Development Hub",
-        chatTitle: "🤖 Built-in AI Assistant - Nova Prompt",
-        welcome: "Hello! I am the NovaSuite AI model. How can I help optimize your workflows today?",
-        placeholder: "Type a message for AI development...",
-        send: "Send",
-        autoTitle: "⚙️ Automated Bots & Workflows",
-        bot1T: "Automated Data Scraper",
-        bot1D: "Analyzes and syncs real-time web data into the system",
-        bot2T: "AI Insights Generator",
-        bot2D: "Generates automated reports and documents instantly",
-        bot3T: "Integration & Tracking Bot",
-        bot3D: "Manages schedules, file synchronization, and system states",
-        active: "Active",
-        pending: "Pending",
-        aiResponse: "Command received in Nova! The AI function is processing your request and syncing automation data."
-    },
-    fr: {
-        dir: "ltr",
-        subtitle: "Centre de Développement d'IA & d'Automatisation Avancée",
-        chatTitle: "🤖 Assistant IA Intégré - Nova Prompt",
-        welcome: "Bonjour! Je suis le modèle d'IA NovaSuite. Comment puis-je vous aider à optimiser vos flux de travail aujourd'hui?",
-        placeholder: "Tapez un message pour le développement de l'IA...",
-        send: "Envoyer",
-        autoTitle: "⚙️ Bots & Flux de Travail Automatisés",
-        bot1T: "Extracteur de Données Automatique",
-        bot1D: "Analyse et synchronise les données web en temps réel dans le système",
-        bot2T: "Générateur d'Aperçus IA",
-        bot2D: "Génère instantanément des rapports et des documents automatisés",
-        bot3T: "Bot d'Intégration et de Suivi",
-        bot3D: "Gère les calendriers, la synchronisation des fichiers et les états du système",
-        active: "Actif",
-        pending: "En attente",
-        aiResponse: "Commande reçue dans Nova! La fonction IA traite votre demande et synchronise les données d'automatisation."
-    },
-    he: {
-        dir: "rtl",
-        subtitle: "מרכז הפיתוח לבינה מלאכותית ואוטומציות מתקדמות",
-        chatTitle: "🤖 עוזר AI מובנה - Nova Prompt",
-        welcome: "שלום! אני מודל ה-AI של NovaSuite. איך אני יכול לעזור לך לייעל את תהליכי העבודה היום?",
-        placeholder: "הקלד הודעה לפיתוח ה-AI...",
-        send: "שלח",
-        autoTitle: "⚙️ בוטים ותהליכים אוטומטיים",
-        bot1T: "סורק נתונים אוטומטי",
-        bot1D: "מנתח ומסנכרן מידע רשת בזמן אמת לתוך המערכת",
-        bot2T: "מחולל תובנות בינה מלאכותית",
-        bot2D: "מפיק דוחות ומסמכים אוטומטיים בלחיצת כפתור",
-        bot3T: "בוט אינטגרציה ומעקב",
-        bot3D: "מנהל תזמונים וסטטוסים של קבצים ומערכות",
-        active: "פעיל",
-        pending: "בהמתנה",
-        aiResponse: "הפקודה התקבלה בנובה! פונקציית ה-AI מעבדת את הבקשה שלך ומסנכרנת את נתוני האוטומציה."
-    }
-};
-
-let currentLang = 'en';
-
-function setLanguage(lang) {
-    currentLang = lang;
-    const dict = translations[lang];
-    
-    // Update HTML layout direction and lang attribute
-    const htmlTag = document.getElementById('htmlTag');
-    htmlTag.setAttribute('dir', dict.dir);
-    htmlTag.setAttribute('lang', lang);
-    
-    // Update text elements
-    document.getElementById('mainSubtitle').innerText = dict.subtitle;
-    document.getElementById('chatCardTitle').innerText = dict.chatTitle;
-    document.getElementById('welcomeMsg').innerText = dict.welcome;
-    document.getElementById('userInput').setAttribute('placeholder', dict.placeholder);
-    document.getElementById('sendBtn').innerText = dict.send;
-    document.getElementById('autoCardTitle').innerText = dict.autoTitle;
-    
-    document.getElementById('bot1Title').innerText = dict.bot1T;
-    document.getElementById('bot1Desc').innerText = dict.bot1D;
-    document.getElementById('bot2Title').innerText = dict.bot2T;
-    document.getElementById('bot2Desc').innerText = dict.bot2D;
-    document.getElementById('bot3Title').innerText = dict.bot3T;
-    document.getElementById('bot3Desc').innerText = dict.bot3D;
-    
-    document.getElementById('badgeActive1').innerText = dict.active;
-    document.getElementById('badgeActive2').innerText = dict.active;
-    document.getElementById('badgePending').innerText = dict.pending;
-
-    // Manage button active states
-    const buttons = document.querySelectorAll('.lang-btn');
-    buttons.forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+<script type="text/javascript">
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+    }, 'google_translate_element');
 }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+<script>
 function sendMessage() {
     const input = document.getElementById('userInput');
     const messageText = input.value.trim();
@@ -377,11 +307,11 @@ function sendMessage() {
     input.value = '';
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    // AI Response based on selected language
+    // AI Response
     setTimeout(() => {
         const systemMessage = document.createElement('div');
         systemMessage.className = 'message system';
-        systemMessage.innerText = translations[currentLang].aiResponse;
+        systemMessage.innerText = "Command received in Nova! The AI function is processing your request and syncing automation data.";
         chatMessages.appendChild(systemMessage);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }, 1000);
