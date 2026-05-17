@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaSuite - Global AI & Automation Hub</title>
+    <title>NovaSuite - Ultimate Multi-Hub</title>
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -32,11 +32,11 @@
         /* Top Bar with Google Translate */
         .top-bar {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
             gap: 15px;
             margin-bottom: 25px;
-            padding: 10px;
+            padding: 10px 20px;
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
@@ -46,6 +46,44 @@
             font-size: 0.9rem;
             color: var(--text-muted);
             font-weight: bold;
+        }
+
+        /* Web Hub Links Section */
+        .web-hub {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .web-hub h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .hub-link {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .hub-link:hover {
+            border-color: var(--primary);
+            background-color: rgba(139, 92, 246, 0.1);
+            transform: translateY(-2px);
         }
 
         header {
@@ -94,6 +132,54 @@
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        /* Unique Calculator Tool */
+        .calc-group {
+            margin-bottom: 15px;
+        }
+
+        .calc-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .calc-group input {
+            width: 100%;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border);
+            padding: 10px;
+            border-radius: 8px;
+            color: var(--text-main);
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .calc-btn {
+            width: 100%;
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .calc-btn:hover {
+            opacity: 0.9;
+        }
+
+        .calc-result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: none;
         }
 
         /* AI Chat Interface */
@@ -161,119 +247,75 @@
             font-weight: bold;
         }
 
-        .chat-input-area button:hover {
-            background-color: var(--primary-hover);
-        }
-
-        /* Automation Panel */
-        .automation-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .auto-item {
-            background-color: var(--bg-main);
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .auto-info h3 {
-            margin: 0 0 5px 0;
-            font-size: 1.1rem;
-        }
-
-        .auto-info p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .status-badge {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
         /* Google Translate Styling Customization */
         .goog-te-gadget-simple {
             background-color: var(--bg-main) !important;
             border: 1px solid var(--border) !important;
             padding: 6px 10px !important;
             border-radius: 6px !important;
-            font-family: inherit !important;
         }
-        .goog-te-gadget-simple span {
-            color: var(--text-main) !important;
-        }
-        .goog-te-banner-frame {
-            display: none !important;
-        }
-        body {
-            top: 0px !important;
-        }
+        .goog-te-gadget-simple span { color: var(--text-main) !important; }
+        .goog-te-banner-frame { display: none !important; }
+        body { top: 0px !important; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="top-bar">
-        <span class="global-text">🌐 Select Language / اختر اللغة:</span>
-        <div id="google_translate_element"></div>
+        <h1>NovaSuite</h1>
+        <div>
+            <span class="global-text">🌐 Language: </span>
+            <div id="google_translate_element" style="display:inline-block; vertical-align:middle;"></div>
+        </div>
     </div>
 
-    <header>
-        <h1>NovaSuite</h1>
-        <p>Global AI & Automation Development Hub</p>
-    </header>
+    <div class="web-hub">
+        <h3>🌐 Global Web Hub / כל האתרים במקום אחד</h3>
+        <div class="links-grid">
+            <a href="https://www.google.com" target="_blank" class="hub-link">Google</a>
+            <a href="https://www.tradingview.com" target="_blank" class="hub-link">TradingView Graphs</a>
+            <a href="https://www.youtube.com" target="_blank" class="hub-link">YouTube Global</a>
+            <a href="https://www.binance.com" target="_blank" class="hub-link">Binance Crypto</a>
+            <a href="https://www.topstep.com" target="_blank" class="hub-link">Topstep Platform</a>
+        </div>
+    </div>
 
     <div class="main-layout">
         <div class="card">
-            <h2>🤖 Built-in AI Assistant - Nova Prompt</h2>
+            <h2>🤖 Advanced AI Assistant - Nova Prompt</h2>
             <div class="chat-container">
                 <div class="chat-messages" id="chatMessages">
-                    <div class="message system">Hello! I am the NovaSuite AI model. How can I help optimize your workflows today?</div>
+                    <div class="message system">Hello! I am your global AI engine. Enter any command to analyze or manage your workspaces.</div>
                 </div>
                 <div class="chat-input-area">
-                    <input type="text" id="userInput" placeholder="Type a message for AI development..." onkeypress="handleKeyPress(event)">
+                    <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
                     <button onclick="sendMessage()">Send</button>
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <h2>⚙️ Automated Bots & Workflows</h2>
-            <div class="automation-list">
-                <div class="auto-item">
-                    <div class="auto-info">
-                        <h3>Automated Data Scraper</h3>
-                        <p>Analyzes and syncs real-time web data into the system</p>
-                    </div>
-                    <span class="status-badge">Active</span>
-                </div>
+            <h2>📊 Smart Strategy & Risk Calculator</h2>
+            <div class="calc-group">
+                <label>Account Balance ($) / סכום חשבון:</label>
+                <input type="number" id="accBalance" value="50000">
+            </div>
+            <div class="calc-group">
+                <label>Max Risk Allowed (%) / אחוז סיכון מקסימלי:</label>
+                <input type="number" id="riskPercent" value="1" step="0.1">
+            </div>
+            <div class="calc-group">
+                <label>Target Profit Ratio (X times risk) / יעד רווח:</label>
+                <input type="number" id="rewardRatio" value="2">
+            </div>
+            <button class="calc-btn" onclick="calculateMatrix()">Run AI Simulation / הפעל סימולציה</button>
 
-                <div class="auto-item">
-                    <div class="auto-info">
-                        <h3>AI Insights Generator</h3>
-                        <p>Generates automated reports and documents instantly</p>
-                    </div>
-                    <span class="status-badge">Active</span>
-                </div>
-
-                <div class="auto-item">
-                    <div class="auto-info">
-                        <h3>Integration & Tracking Bot</h3>
-                        <p>Manages schedules, file synchronization, and system states</p>
-                    </div>
-                    <span class="status-badge" style="background-color: rgba(156, 163, 175, 0.1); color: var(--text-muted);">Pending</span>
-                </div>
+            <div class="calc-result" id="calcResult">
+                <h4 style="margin-top:0; color:var(--success);">Simulation Complete / תוצאות הסימולציה:</h4>
+                <p>• Max Risk Amount: <strong id="resRisk"></strong></p>
+                <p>• Target Profit Goal: <strong id="resProfit"></strong></p>
+                <p>• Recommended Safe Size: <strong id="resSize">Dynamic Safe Mode Active</strong></p>
             </div>
         </div>
     </div>
@@ -291,6 +333,21 @@ function googleTranslateElementInit() {
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
+function calculateMatrix() {
+    const balance = parseFloat(document.getElementById('accBalance').value);
+    const risk = parseFloat(document.getElementById('riskPercent').value);
+    const ratio = parseFloat(document.getElementById('rewardRatio').value);
+
+    if (isNaN(balance) || isNaN(risk) || isNaN(ratio)) return;
+
+    const riskAmount = balance * (risk / 100);
+    const profitGoal = riskAmount * ratio;
+
+    document.getElementById('resRisk').innerText = "$" + riskAmount.toFixed(2);
+    document.getElementById('resProfit').innerText = "$" + profitGoal.toFixed(2);
+    document.getElementById('calcResult').style.display = 'block';
+}
+
 function sendMessage() {
     const input = document.getElementById('userInput');
     const messageText = input.value.trim();
@@ -298,7 +355,6 @@ function sendMessage() {
 
     const chatMessages = document.getElementById('chatMessages');
 
-    // User Message
     const userMessage = document.createElement('div');
     userMessage.className = 'message user';
     userMessage.innerText = messageText;
@@ -307,11 +363,10 @@ function sendMessage() {
     input.value = '';
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    // AI Response
     setTimeout(() => {
         const systemMessage = document.createElement('div');
         systemMessage.className = 'message system';
-        systemMessage.innerText = "Command received in Nova! The AI function is processing your request and syncing automation data.";
+        systemMessage.innerText = "System Matrix Updated. Global nodes are fully synchronized.";
         chatMessages.appendChild(systemMessage);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }, 1000);
@@ -322,7 +377,3 @@ function handleKeyPress(event) {
         sendMessage();
     }
 }
-</script>
-
-</body>
-</html>
