@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaSuite Control Center</title>
+    <title>NovaSuite Sovereign Core</title>
     <style>
         :root {
-            --bg-deep: #060813;
-            --bg-surface: #0f1322;
-            --bg-field: #080a14;
+            --bg-deep: #05070f;
+            --bg-surface: #0c0f1d;
+            --bg-field: #060813;
             --primary: #8b5cf6;
             --primary-hover: #7c3aed;
             --accent-green: #10b981;
@@ -20,211 +20,39 @@
             --border-color: #1e293b;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: var(--bg-deep); color: var(--text-body); padding: 25px; }
+        .workspace { max-width: 1400px; margin: 0 auto; }
 
-        body {
-            background-color: var(--bg-deep);
-            color: var(--text-body);
-            padding: 30px;
-            line-height: 1.5;
-        }
-
-        .workspace {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* Top Premium Header */
+        /* Header Style */
         .premium-header {
-            background: linear-gradient(135deg, var(--bg-surface) 0%, #13192e 100%);
+            background: linear-gradient(135deg, var(--bg-surface) 0%, #12162b 100%);
             border: 1px solid var(--border-color);
-            padding: 25px 35px;
-            border-radius: 16px;
-            margin-bottom: 30px;
+            padding: 20px 30px;
+            border-radius: 14px;
+            margin-bottom: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
+        .brand-title h1 { font-size: 1.8rem; color: var(--text-heading); font-weight: 800; }
+        .brand-title p { color: var(--text-muted); font-size: 0.9rem; margin-top: 2px; }
+        .system-badge { background: rgba(139, 92, 246, 0.1); border: 1px solid var(--primary); color: var(--primary); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
 
-        .brand-title h1 {
-            font-size: 2rem;
-            color: var(--text-heading);
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-title p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-top: 4px;
-        }
-
-        .system-badge {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid var(--accent-green);
-            color: var(--accent-green);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* Professional Dashboard Grid */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 25px;
-        }
-
+        /* Grid Layout */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
         .panel-full { grid-column: span 12; }
-        .panel-left { grid-column: span 7; }
-        .panel-right { grid-column: span 5; }
+        .panel-7 { grid-column: span 7; }
+        .panel-5 { grid-column: span 5; }
+        @media (max-width: 1024px) { .panel-7, .panel-5 { grid-column: span 12; } }
 
-        @media (max-width: 1024px) {
-            .panel-left, .panel-right { grid-column: span 12; }
-        }
+        /* Panel UI */
+        .matrix-panel { background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; }
+        .panel-header { font-size: 1.15rem; font-weight: 700; color: var(--text-heading); margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
 
-        /* Architectural Panel Style */
-        .matrix-panel {
-            background-color: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .panel-header {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-heading);
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Form Layouts & Controls */
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .field-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .field-group label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        input, select, textarea {
-            background-color: var(--bg-field);
-            border: 1px solid var(--border-color);
-            color: var(--text-heading);
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            text-align: right;
-        }
-
-        input:focus, select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
-        }
-
-        /* Buttons Core */
-        .action-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .action-btn:hover { background-color: var(--primary-hover); }
-        .btn-success { background-color: var(--accent-green); }
-        .btn-success:hover { background-color: #059669; }
-        .btn-gold { background-color: var(--accent-gold); color: #000; }
-        .btn-gold:hover { background-color: #d97706; }
-
-        /* Custom Matrix Hub Block */
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .hub-card {
-            background-color: var(--bg-field);
-            border: 1px solid var(--border-color);
-            padding: 16px;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .hub-card h4 { color: var(--primary); font-size: 1.05rem; }
-        .hub-card p { font-size: 0.85rem; color: var(--text-muted); }
-
-        /* Analytics Metric Row */
-        .metric-banner {
-            display: flex;
-            gap: 30px;
-            background-color: var(--bg-field);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 20px;
-        }
-
-        .metric-tile {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .metric-tile span { font-size: 0.85rem; color: var(--text-muted); }
-        .metric-tile strong { font-size: 1.4rem; color: var(--text-heading); }
-
-        /* Data Tables */
-        .table-wrapper {
-            overflow-x: auto;
-            background-color: var(--bg-field);
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: right;
-        }
-
-        th
+        /* Controls */
+        .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 15px; }
+        .field-group { display: flex; flex-direction: column; gap: 5px; }
+        .field-group label { font-size: 0.8rem; color: var(--text-muted); }
+        
+        input, select, button { background-color: var(--bg-field); border: 1px solid var(--border-color); color: var(--text-heading); padding: 10px 14px; border-radius: 8px; font-size:
