@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaSuite - Ultimate Control Matrix</title>
+    <title>NovaSuite • נובה סוויט</title>
     <style>
         :root {
             --bg-main: #060913;
@@ -31,7 +31,7 @@
 
         .container { max-width: 1400px; margin: 0 auto; }
 
-        /* Header */
+        /* Header Style */
         .header-nav {
             display: flex;
             justify-content: space-between;
@@ -54,7 +54,7 @@
         .btn-auth { background: transparent; border: 1px solid var(--primary); color: var(--primary); padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
         .btn-auth.fill { background: var(--primary); color: #000; }
 
-        /* Rows */
+        /* Rows Setup */
         .row-section { margin-bottom: 35px; }
         .row-header { font-size: 1.25rem; font-weight: bold; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
         .row-header.row1 { color: var(--primary); }
@@ -63,7 +63,7 @@
 
         .matrix-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 
-        /* Cards */
+        /* Core Cards */
         .matrix-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -72,7 +72,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 180px;
+            min-height: 200px;
         }
         .card-badge { align-self: flex-start; font-size: 0.75rem; padding: 3px 8px; border-radius: 4px; margin-bottom: 10px; }
         .badge-ai { background: rgba(167, 139, 250, 0.1); color: var(--primary); }
@@ -85,26 +85,28 @@
         .btn-trigger {
             background: #1f2937; border: 1px solid var(--border); color: #fff;
             padding: 10px; border-radius: 6px; font-size: 0.85rem; text-align: center; cursor: pointer; width: 100%;
+            margin-top: auto;
         }
-        .matrix-card:hover .btn-trigger { background: var(--primary); color: #000; }
+        .matrix-card:hover .btn-trigger { background: var(--primary); color: #000; font-weight: bold; }
 
-        /* Utilities */
+        /* Panels layout */
         .utility-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
         @media (max-width: 768px) { .utility-layout { grid-template-columns: 1fr; } }
 
         .panel-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
         .panel-box h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 15px; }
 
-        .input-ctrl { width: 100%; background: #060913; border: 1px solid var(--border); padding: 10px; border-radius: 6px; color: #fff; outline: none; margin-bottom: 12px; }
+        .input-ctrl { width: 100%; background: #060913; border: 1px solid var(--border); padding: 10px; border-radius: 6px; color: #fff; outline: none; margin-bottom: 12px; font-size: 0.9rem; }
         .btn-action { width: 100%; background: var(--primary); color: #000; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; }
 
-        /* Modals */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        /* System Modal Engine */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 15px; }
         .modal-overlay.active { display: flex; }
         
-        .modal-frame { background: var(--bg-modal); border: 1px solid var(--border); width: 90%; max-width: 650px; border-radius: 12px; padding: 25px; position: relative; text-align: right; }
-        .modal-close { position: absolute; top: 15px; left: 15px; background: #1f2937; border: none; color: #fff; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; }
-        .modal-title { font-size: 1.3rem; color: var(--primary); margin-bottom: 15px; }
+        .modal-frame { background: var(--bg-modal); border: 1px solid var(--border); width: 100%; max-width: 650px; border-radius: 12px; padding: 25px; position: relative; text-align: right; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .modal-close { position: absolute; top: 15px; left: 15px; background: #1f2937; border: none; color: #fff; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-weight: bold; }
+        .modal-close:hover { background: var(--danger); }
+        .modal-title { font-size: 1.3rem; color: var(--primary); margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
     </style>
 </head>
 <body>
@@ -229,27 +231,4 @@
     </section>
 
     <div class="utility-layout">
-        <div class="panel-box">
-            <h2>🧮 סימולטור אסטרטגיה וניהול הון</h2>
-            <input type="number" id="simBal" value="50000" class="input-ctrl" placeholder="גודל הון ($)">
-            <input type="number" id="simRisk" value="1" step="0.1" class="input-ctrl" placeholder="סיכון מוגדר (%)">
-            <input type="number" id="simSl" value="20" class="input-ctrl" placeholder="עצירת הפסד (נקודות)">
-            <button class="btn-action" onclick="calcSizer()">בצע חישוב סיכון</button>
-            <div id="sizerOutput" style="margin-top:15px; padding:10px; background:#060913; border-radius:6px; display:none;">
-                <p>• הפסד כספי מותר: <strong id="outRiskCash"></strong></p>
-                <p>• כמות חוזים מקסימלית (MNQ): <strong id="outContractsMax" style="color:var(--success);"></strong></p>
-            </div>
-        </div>
-
-        <div class="panel-box">
-            <h2>💳 מרכז תשלומים וסליקה גלובלית</h2>
-            <select id="payPlan" class="input-ctrl">
-                <option value="99">תוכנית בסיסית - $99/חודש</option>
-                <option value="249">תוכנית מקצוענית - $249/חודש</option>
-            </select>
-            <button class="btn-action" style="background:var(--accent-gold);" onclick="openModal('modalPayment')">מעבר לעמוד סליקה</button>
-        </div>
-    </div>
-</div>
-
-<div class="modal-
+        <div class="panel-
