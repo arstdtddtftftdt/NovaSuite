@@ -200,7 +200,7 @@
             <h2>🤖 עוזר AI מובנה - Nova Prompt</h2>
             <div class="chat-container">
                 <div class="chat-messages" id="chatMessages">
-                    <div class="message system">שלום! אני ממודל ה-AI של NovaSuite. איך אני יכול לעזור לך לייעל את תהליכי העבודה היום?</div>
+                    <div class="message system">שלום! אני מודל ה-AI של NovaSuite. איך אני יכול לעזור לך לייעל את תהליכי העבודה היום?</div>
                 </div>
                 <div class="chat-input-area">
                     <input type="text" id="userInput" placeholder="הקלד הודעה לפיתוח ה-AI..." onkeypress="handleKeyPress(event)">
@@ -261,7 +261,7 @@ function sendMessage() {
     setTimeout(() => {
         const systemMessage = document.createElement('div');
         systemMessage.className = 'message system';
-        systemMessage.innerText = "הפקודה התקבלה בנובה! פונקציית ה-AI מעבדת את הבקשה שלך ומסנכרנת את נתוני האוטומציה.";
+        systemMessage.innerText = "הפקודה התקבלה בנובה! פונקציית ה-AI מעבדת את הבקשה שלך ומסנכזנת את נתוני האוטומציה.";
         chatMessages.appendChild(systemMessage);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }, 1000);
