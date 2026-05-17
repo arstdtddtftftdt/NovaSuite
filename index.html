@@ -1,322 +1,133 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaSuite - Ultimate Global Control Matrix</title>
+    <title>NovaSuite - The Ultimate Control Matrix</title>
     <style>
         :root {
-            --bg-main: #0b0f19;
-            --bg-card: #151b2c;
-            --primary: #8b5cf6;
-            --primary-hover: #7c3aed;
+            --bg-main: #060913;
+            --bg-card: rgba(21, 28, 48, 0.6);
+            --bg-modal: #0f1626;
+            --primary: #a78bfa;
+            --primary-hover: #8b5cf6;
             --success: #10b981;
             --danger: #ef4444;
+            --accent-gold: #fbbf24;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --border: #222c44;
-            --accent-blue: #3b82f6;
-            --accent-gold: #f59e0b;
+            --border: rgba(255, 255, 255, 0.08);
+            --glass-glow: rgba(139, 92, 246, 0.05);
         }
+
+        * { box-sizing: border-box; transition: all 0.2s ease; }
 
         body {
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-main);
+            background-image: radial-gradient(circle at top right, rgba(139, 92, 246, 0.08), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.03), transparent 35%);
             color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 25px;
         }
 
-        .container { max-width: 1400px; margin: 0 auto; }
+        .container { max-width: 1450px; margin: 0 auto; }
 
-        /* Top Bar */
-        .top-bar {
+        /* Navbar Header */
+        .header-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding: 20px 25px;
-            background-color: var(--bg-card);
+            padding: 20px 30px;
+            background: rgba(21, 28, 48, 0.4);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border);
-            border-radius: 14px;
-        }
-        .top-bar h1 { margin: 0; color: var(--primary); font-size: 1.9rem; font-weight: 800; letter-spacing: 0.5px; }
-        .top-bar p { margin: 5px 0 0 0; font-size: 0.9rem; color: var(--text-muted); }
-
-        /* Row Architecture */
-        .row-section {
+            border-radius: 16px;
             margin-bottom: 35px;
-        }
-        .row-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border);
-        }
-        .row-title.ai { color: var(--primary); }
-        .row-title.finance { color: var(--accent-gold); }
-        .row-title.skills { color: var(--success); }
-
-        .matrix-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
-        /* High-End System Cards */
-        .system-card {
-            background-color: var(--bg-card);
+        .brand h1 { margin: 0; font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .brand p { margin: 4px 0 0 0; font-size: 0.85rem; color: var(--text-muted); letter-spacing: 0.5px; }
+
+        .nav-controls { display: flex; align-items: center; gap: 20px; }
+        
+        /* Language Buttons */
+        .lang-selector { display: flex; gap: 6px; background: rgba(0,0,0,0.2); padding: 4px; border-radius: 8px; border: 1px solid var(--border); }
+        .lang-btn { background: none; border: none; color: var(--text-muted); padding: 6px 12px; font-size: 0.8rem; font-weight: bold; cursor: pointer; border-radius: 6px; }
+        .lang-btn.active { background: var(--primary); color: #000; }
+
+        /* Auth System */
+        .auth-cluster { display: flex; gap: 10px; }
+        .btn-auth { background: transparent; border: 1px solid var(--primary); color: var(--primary); padding: 8px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.88rem; }
+        .btn-auth.fill { background: var(--primary); color: #060913; }
+        .btn-auth:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2); }
+
+        /* Rows Layout Architecture */
+        .row-section { margin-bottom: 40px; }
+        .row-header { display: flex; align-items: center; gap: 12px; font-size: 1.35rem; font-weight: 800; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+        .row-header.row1 { color: var(--primary); }
+        .row-header.row2 { color: var(--accent-gold); }
+        .row-header.row3 { color: var(--success); }
+
+        .matrix-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+
+        /* Luxury Cyber Cards */
+        .matrix-card {
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
             position: relative;
-            transition: transform 0.2s, border-color 0.2s;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
-        .system-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--primary);
-        }
-        .card-tag {
-            align-self: flex-start;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 4px 8px;
-            border-radius: 6px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-        }
-        .tag-ai { background: rgba(139, 92, 246, 0.15); color: var(--primary); }
-        .tag-finance { background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); }
-        .tag-skills { background: rgba(16, 185, 129, 0.15); color: var(--success); }
+        .matrix-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, var(--glass-glow), transparent); opacity: 0; transition: opacity 0.3s; }
+        .matrix-card:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 12px 30px rgba(139, 92, 246, 0.1); }
+        .matrix-card:hover::before { opacity: 1; }
 
-        .system-card h3 { margin: 0 0 8px 0; font-size: 1.15rem; color: var(--text-main); }
-        .system-card p { margin: 0 0 20px 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.4; }
-        .system-card a {
-            margin-top: auto;
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: color 0.2s;
-        }
-        .system-card a:hover { color: var(--primary); }
+        .card-badge { align-self: flex-start; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; margin-bottom: 14px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .badge-ai { background: rgba(167, 139, 250, 0.12); color: var(--primary); }
+        .badge-finance { background: rgba(251, 191, 36, 0.12); color: var(--accent-gold); }
+        .badge-skills { background: rgba(16, 185, 129, 0.12); color: var(--success); }
 
-        /* Split Layout for Widgets */
-        .bottom-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-top: 20px;
-        }
-        @media (max-width: 950px) { .bottom-layout { grid-template-columns: 1fr; } }
-
-        .widget-card {
-            background-color: var(--bg-card);
-            border-radius: 14px;
-            padding: 22px;
-            border: 1px solid var(--border);
-        }
-        .widget-card h2 { margin-top: 0; margin-bottom: 18px; font-size: 1.25rem; color: var(--primary); }
-
-        /* Inputs & Buttons */
-        .input-field {
-            width: 100%; background-color: var(--bg-main); border: 1px solid var(--border);
-            padding: 12px; border-radius: 8px; color: var(--text-main); box-sizing: border-box;
-            outline: none; font-size: 0.95rem; margin-bottom: 12px;
-        }
-        .btn {
-            width: 100%; background-color: var(--primary); color: white; border: none; padding: 12px;
-            border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.95rem; transition: background 0.2s;
-        }
-        .btn:hover { background-color: var(--primary-hover); }
-        .btn-success { background-color: var(--success); }
-
-        /* Assistant Console */
-        .chat-container { display: flex; flex-direction: column; height: 260px; background-color: var(--bg-main); border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
-        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .message { padding: 10px 14px; border-radius: 8px; max-width: 85%; font-size: 0.95rem; background-color: var(--border); color: var(--text-main); align-self: flex-start; }
-        .message.user { background-color: var(--primary); color: white; align-self: flex-end; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    
-    <div class="top-bar">
-        <div>
-            <h1>NovaSuite Control Matrix</h1>
-            <p>Ultimate Integrated Multiverse Platform Terminal</p>
-        </div>
-        <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; letter-spacing: 1px;">SYSTEM STATUS: ONLINE</div>
-    </div>
-
-    <div class="row-section">
-        <div class="row-title ai">🤖 Row 1: AI & Intelligence Power</div>
-        <div class="matrix-grid">
-            <div class="system-card">
-                <div class="card-tag tag-ai">Search Engine</div>
-                <h3>Google Global</h3>
-                <p>Primary decentralized open-source cloud database lookup network portal.</p>
-                <a href="https://www.google.com" target="_blank">Launch Workspace →</a>
-            </div>
-            <div class="system-card">
-                <div class="card-tag tag-ai">AI Chat Portal</div>
-                <h3>ChatGPT Pro</h3>
-                <p>Direct professional terminal for complex code generation, logical text models, and problem-solving.</p>
-                <a href="https://chatgpt.com" target="_blank">Launch Workspace →</a>
-            </div>
-            <div class="system-card">
-                <div class="card-tag tag-ai">Image Generation</div>
-                <h3>Midjourney / Images</h3>
-                <p>Hyper-realistic visual design engines and advanced system style composition interface.</p>
-                <a href="https://www.midjourney.com" target="_blank">Launch Workspace →</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="row-section">
-        <div class="row-title finance">💰 Row 2: Global Capital & Futures Markets</div>
-        <div class="matrix-grid">
-            <div class="system-card">
-                <div class="card-tag tag-finance">Market Streaming</div>
-                <h3>TradingView Terminal</h3>
-                <p>Real-time institutional chart engine for tracking NASDAQ (MNQ) futures contracts and market setups.</p>
-                <a href="https://www.tradingview.com" target="_blank">Launch Workspace →</a>
-            </div>
-            <div class="system-card">
-                <div class="card-tag tag-finance">Prop Firm Evaluation</div>
-                <h3>Topstep Portal</h3>
-                <p>Official dashboard for managing funded account challenges, rules validation, and profit targets.</p>
-                <a href="https://www.topstep.com" target="_blank">Launch Workspace →</a>
-            </div>
-            <div class="system-card">
-                <div class="card-tag tag-finance">Crypto Ecosystem</div>
-                <h3>Binance Wallet</h3>
-                <p>Global decentralized digital asset hub for handling secure P2P transfers and fund withdrawals.</p>
-                <a href="https://www.binance.com" target="_blank">Launch Workspace →</a>
-            </div>
-            <div class="system-card">
-                <div class="card-tag tag-finance">Freelance Income</div>
-                <h3>Fiverr Global</h3>
-                <p>International professional network for deploying technological skills and monetizing assets.</p>
-                <a href="https://www.fiverr.com" target="_blank">Launch Workspace →</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="row-section">
-        <div class="row-title skills">📚 Row 3: Knowledge, Skills & Automation</div>
-        <div class="matrix-grid">
-            <div class="system-card">
-                <div class="card-tag tag-skills">Video Academy</div>
-                <h3>YouTube Intelligence</h3>
-                <p>Streaming framework for expert tutorials, economic news analysis, and tech reviews.</p>
-                <a href="https://www.youtube.com" target="_blank">Launch Workspace →</a>
-            </div>
-            <div class="system-card">
-                <div class="card-tag tag-skills">Language Master</div>
-                <h3>Duolingo Dashboard</h3>
-                <p>Interactive language core for tracking daily vocabulary milestones, English training, and habits.</p>
-                <a href="https://www.duolingo.com" target="_blank">Launch Workspace →</a>
-            </div>
-            <div class="system-card">
-                <div class="card-tag tag-skills">Cloud Deployment</div>
-                <h3>GitHub Repository</h3>
-                <p>Core source control infrastructure holding your system files, cloud architecture, and code versions.</p>
-                <a href="https://github.com" target="_blank">Launch Workspace →</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="bottom-layout">
+        .matrix-card h3 { margin: 0 0 10px 0; font-size: 1.25rem; color: #fff; font-weight: 700; }
+        .matrix-card p { margin: 0 0 25px 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
         
-        <div class="widget-card">
-            <h2>📊 Strategy & Capital Simulator</h2>
-            <div style="margin-bottom:10px;">
-                <label style="font-size:0.85rem; color:var(--text-muted);">Account Capital Size ($):</label>
-                <input type="number" id="balance" value="50000" class="input-field">
-            </div>
-            <div style="margin-bottom:10px;">
-                <label style="font-size:0.85rem; color:var(--text-muted);">Allowed Risk Parameter (%):</label>
-                <input type="number" id="risk" value="1" step="0.1" class="input-field">
-            </div>
-            <div style="margin-bottom:10px;">
-                <label style="font-size:0.85rem; color:var(--text-muted);">Stop Loss Distance (Points):</label>
-                <input type="number" id="stoploss" value="20" class="input-field">
-            </div>
-            <button class="btn btn-success" onclick="runSimulation()">Execute Capital Matrix</button>
+        .btn-trigger {
+            margin-top: auto; background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: #fff;
+            padding: 11px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; text-align: center; cursor: pointer;
+        }
+        .matrix-card:hover .btn-trigger { background: var(--primary); color: #060913; border-color: var(--primary); font-weight: 700; }
 
-            <div id="simResult" style="margin-top:15px; padding:12px; background:var(--bg-main); border:1px solid var(--border); border-radius:8px; display:none;">
-                <p style="margin:4px 0; font-size:0.9rem;">• Maximum Allowed Cash Loss: <strong id="outCash"></strong></p>
-                <p style="margin:4px 0; font-size:0.9rem;">• Precise Contract Limit (MNQ): <strong id="outContracts" style="color:var(--success);"></strong></p>
-            </div>
-        </div>
+        /* Split Utilities Area */
+        .utility-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
+        @media (max-width: 950px) { .utility-layout { grid-template-columns: 1fr; } }
 
-        <div class="widget-card">
-            <h2>🤖 Nova Personal Assistant</h2>
-            <div class="chat-container">
-                <div class="chat-messages" id="chatMsg">
-                    <div class="message system">Nova Suite Core Hub Online. Complete global rows synced. Ready for input.</div>
-                </div>
-                <div style="display:flex; padding:8px; gap:8px; background:var(--bg-card); border-top:1px solid var(--border);">
-                    <input type="text" id="chatIn" class="input-field" style="margin:0; padding:10px;" placeholder="Transmit system query vector..." onkeypress="checkKey(event)">
-                    <button class="btn" style="width:auto; padding:0 20px;" onclick="sendTerminalMsg()">Send</button>
-                </div>
-            </div>
-        </div>
+        .panel-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 25px; }
+        .panel-box h2 { margin-top: 0; margin-bottom: 20px; font-size: 1.35rem; color: var(--primary); }
 
-    </div>
-</div>
+        .input-ctrl { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 12px 16px; border-radius: 10px; color: #fff; outline: none; font-size: 0.95rem; margin-bottom: 15px; }
+        .input-ctrl:focus { border-color: var(--primary); }
+        
+        .btn-action { width: 100%; background: var(--primary); color: #060913; border: none; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; }
+        .btn-action:hover { background: var(--primary-hover); transform: translateY(-1px); }
 
-<script>
-function runSimulation() {
-    const bal = parseFloat(document.getElementById('balance').value);
-    const rsk = parseFloat(document.getElementById('risk').value);
-    const sl = parseFloat(document.getElementById('stoploss').value);
+        /* Advanced Modern Modals Architecture */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 5, 11, 0.85); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        
+        .modal-frame { background: var(--bg-modal); border: 1px solid rgba(255,255,255,0.1); width: 90%; max-width: 750px; border-radius: 20px; padding: 30px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.6); transform: scale(0.95); transition: transform 0.3s ease; }
+        .modal-overlay.active .modal-frame { transform: scale(1); }
+        
+        .modal-close { position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.05); border: none; color: #fff; font-size: 1.1rem; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .modal-close:hover { background: var(--danger); }
+        .modal-title { margin-top: 0; font-size: 1.5rem; color: var(--primary); margin-bottom: 20px; font-weight: 800; }
 
-    if(isNaN(bal) || isNaN(rsk) || isNaN(sl) || sl <= 0) return;
-
-    const cashRisk = bal * (rsk / 100);
-    const contractRisk = sl * 2; // MNQ multiplier ($2 per point)
-    const totalLots = cashRisk / contractRisk;
-
-    document.getElementById('outCash').innerText = "$" + cashRisk.toFixed(2);
-    document.getElementById('outContracts').innerText = totalLots.toFixed(2) + " Contracts Max";
-    document.getElementById('simResult').style.display = 'block';
-}
-
-function sendTerminalMsg() {
-    const input = document.getElementById('chatIn');
-    const txt = input.value.trim();
-    if(txt === '') return;
-
-    const box = document.getElementById('chatMsg');
-    const uDiv = document.createElement('div');
-    uDiv.className = 'message user';
-    uDiv.innerText = txt;
-    box.appendChild(uDiv);
-    input.value = '';
-    box.scrollTop = box.scrollHeight;
-
-    setTimeout(() => {
-        const sDiv = document.createElement('div');
-        sDiv.className = 'message';
-        sDiv.innerText = "Command vector acknowledged. All structural matrix components fully synchronized.";
-        box.appendChild(sDiv);
-        box.scrollTop = box.scrollHeight;
-    }, 1000);
-}
-
-function checkKey(e) { if(e.key === 'Enter') sendTerminalMsg(); }
-</script>
-</body>
-</html>
+        /* Embedded Live Graph Adjustments */
+        .tradingview-embed-wrapper { width: 100%; height: 400px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+    </style>
+</head
