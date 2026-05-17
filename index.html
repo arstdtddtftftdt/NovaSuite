@@ -215,4 +215,108 @@
 
     <div class="row-section">
         <div class="row-title skills">📚 Row 3: Knowledge, Skills & Automation</div>
-        <div class="matrix
+        <div class="matrix-grid">
+            <div class="system-card">
+                <div class="card-tag tag-skills">Video Academy</div>
+                <h3>YouTube Intelligence</h3>
+                <p>Streaming framework for expert tutorials, economic news analysis, and tech reviews.</p>
+                <a href="https://www.youtube.com" target="_blank">Launch Workspace →</a>
+            </div>
+            <div class="system-card">
+                <div class="card-tag tag-skills">Language Master</div>
+                <h3>Duolingo Dashboard</h3>
+                <p>Interactive language core for tracking daily vocabulary milestones, English training, and habits.</p>
+                <a href="https://www.duolingo.com" target="_blank">Launch Workspace →</a>
+            </div>
+            <div class="system-card">
+                <div class="card-tag tag-skills">Cloud Deployment</div>
+                <h3>GitHub Repository</h3>
+                <p>Core source control infrastructure holding your system files, cloud architecture, and code versions.</p>
+                <a href="https://github.com" target="_blank">Launch Workspace →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-layout">
+        
+        <div class="widget-card">
+            <h2>📊 Strategy & Capital Simulator</h2>
+            <div style="margin-bottom:10px;">
+                <label style="font-size:0.85rem; color:var(--text-muted);">Account Capital Size ($):</label>
+                <input type="number" id="balance" value="50000" class="input-field">
+            </div>
+            <div style="margin-bottom:10px;">
+                <label style="font-size:0.85rem; color:var(--text-muted);">Allowed Risk Parameter (%):</label>
+                <input type="number" id="risk" value="1" step="0.1" class="input-field">
+            </div>
+            <div style="margin-bottom:10px;">
+                <label style="font-size:0.85rem; color:var(--text-muted);">Stop Loss Distance (Points):</label>
+                <input type="number" id="stoploss" value="20" class="input-field">
+            </div>
+            <button class="btn btn-success" onclick="runSimulation()">Execute Capital Matrix</button>
+
+            <div id="simResult" style="margin-top:15px; padding:12px; background:var(--bg-main); border:1px solid var(--border); border-radius:8px; display:none;">
+                <p style="margin:4px 0; font-size:0.9rem;">• Maximum Allowed Cash Loss: <strong id="outCash"></strong></p>
+                <p style="margin:4px 0; font-size:0.9rem;">• Precise Contract Limit (MNQ): <strong id="outContracts" style="color:var(--success);"></strong></p>
+            </div>
+        </div>
+
+        <div class="widget-card">
+            <h2>🤖 Nova Personal Assistant</h2>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMsg">
+                    <div class="message system">Nova Suite Core Hub Online. Complete global rows synced. Ready for input.</div>
+                </div>
+                <div style="display:flex; padding:8px; gap:8px; background:var(--bg-card); border-top:1px solid var(--border);">
+                    <input type="text" id="chatIn" class="input-field" style="margin:0; padding:10px;" placeholder="Transmit system query vector..." onkeypress="checkKey(event)">
+                    <button class="btn" style="width:auto; padding:0 20px;" onclick="sendTerminalMsg()">Send</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function runSimulation() {
+    const bal = parseFloat(document.getElementById('balance').value);
+    const rsk = parseFloat(document.getElementById('risk').value);
+    const sl = parseFloat(document.getElementById('stoploss').value);
+
+    if(isNaN(bal) || isNaN(rsk) || isNaN(sl) || sl <= 0) return;
+
+    const cashRisk = bal * (rsk / 100);
+    const contractRisk = sl * 2; // MNQ multiplier ($2 per point)
+    const totalLots = cashRisk / contractRisk;
+
+    document.getElementById('outCash').innerText = "$" + cashRisk.toFixed(2);
+    document.getElementById('outContracts').innerText = totalLots.toFixed(2) + " Contracts Max";
+    document.getElementById('simResult').style.display = 'block';
+}
+
+function sendTerminalMsg() {
+    const input = document.getElementById('chatIn');
+    const txt = input.value.trim();
+    if(txt === '') return;
+
+    const box = document.getElementById('chatMsg');
+    const uDiv = document.createElement('div');
+    uDiv.className = 'message user';
+    uDiv.innerText = txt;
+    box.appendChild(uDiv);
+    input.value = '';
+    box.scrollTop = box.scrollHeight;
+
+    setTimeout(() => {
+        const sDiv = document.createElement('div');
+        sDiv.className = 'message';
+        sDiv.innerText = "Command vector acknowledged. All structural matrix components fully synchronized.";
+        box.appendChild(sDiv);
+        box.scrollTop = box.scrollHeight;
+    }, 1000);
+}
+
+function checkKey(e) { if(e.key === 'Enter') sendTerminalMsg(); }
+</script>
+</body>
+</html>
