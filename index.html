@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaSuite - Ultimate Multi-Hub</title>
+    <title>NovaSuite - Ultimate Global Hub</title>
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -34,220 +34,97 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding: 10px 20px;
+            margin-bottom: 30px;
+            padding: 15px 25px;
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
         }
 
-        .global-text {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-weight: bold;
-        }
-
-        /* Web Hub Links Section */
-        .web-hub {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-
-        .web-hub h3 {
-            margin-top: 0;
+        .logo-area h1 {
+            margin: 0;
             color: var(--primary);
-        }
-
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-        }
-
-        .hub-link {
-            background-color: var(--bg-main);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 12px;
-            border-radius: 10px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.2s;
-        }
-
-        .hub-link:hover {
-            border-color: var(--primary);
-            background-color: rgba(139, 92, 246, 0.1);
-            transform: translateY(-2px);
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 20px;
-        }
-
-        header h1 {
-            color: var(--primary);
-            font-size: 2.8rem;
-            margin: 0 0 10px 0;
+            font-size: 2rem;
             letter-spacing: 1px;
         }
 
-        header p {
+        .logo-area p {
+            margin: 5px 0 0 0;
             color: var(--text-muted);
-            font-size: 1.2rem;
-            margin: 0;
+            font-size: 0.9rem;
         }
 
-        .main-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
+        /* Mega Hub Rows Styling */
+        .hub-section {
+            margin-bottom: 30px;
         }
 
-        @media (max-width: 900px) {
-            .main-layout { grid-template-columns: 1fr; }
-        }
-
-        .card {
-            background-color: var(--bg-card);
-            border-radius: 16px;
-            padding: 25px;
-            border: 1px solid var(--border);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-        }
-
-        .card h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+        .row-title {
+            font-size: 1.3rem;
             color: var(--primary);
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
         }
 
-        /* Unique Calculator Tool */
-        .calc-group {
-            margin-bottom: 15px;
+        .links-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
         }
 
-        .calc-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .calc-group input {
-            width: 100%;
-            background-color: var(--bg-main);
-            border: 1px solid var(--border);
-            padding: 10px;
-            border-radius: 8px;
-            color: var(--text-main);
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        .calc-btn {
-            width: 100%;
-            background-color: var(--success);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        .calc-btn:hover {
-            opacity: 0.9;
-        }
-
-        .calc-result {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: var(--bg-main);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            display: none;
-        }
-
-        /* AI Chat Interface */
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            height: 350px;
-            background-color: var(--bg-main);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .message {
-            padding: 10px 14px;
-            border-radius: 8px;
-            max-width: 80%;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            background-color: var(--border);
-            color: var(--text-main);
-            align-self: flex-start;
-        }
-
-        .message.user {
-            background-color: var(--primary);
-            color: white;
-            align-self: flex-end;
-        }
-
-        .chat-input-area {
-            display: flex;
-            padding: 10px;
+        .hub-card {
             background-color: var(--bg-card);
-            border-top: 1px solid var(--border);
-            gap: 10px;
-        }
-
-        .chat-input-area input {
-            flex: 1;
-            background-color: var(--bg-main);
             border: 1px solid var(--border);
-            padding: 10px;
-            border-radius: 8px;
+            border-radius: 12px;
+            padding: 18px;
+            text-decoration: none;
             color: var(--text-main);
-            outline: none;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .chat-input-area button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0 20px;
-            border-radius: 8px;
-            cursor: pointer;
+        .hub-card:hover {
+            border-color: var(--primary);
+            background-color: rgba(139, 92, 246, 0.05);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        .hub-card h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .hub-card p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        .badge {
+            align-self: flex-start;
+            background-color: rgba(139, 92, 246, 0.15);
+            color: var(--primary);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
             font-weight: bold;
         }
 
-        /* Google Translate Styling Customization */
+        .badge.money {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+
+        /* Google Translate Styling */
         .goog-te-gadget-simple {
             background-color: var(--bg-main) !important;
             border: 1px solid var(--border) !important;
@@ -262,63 +139,85 @@
 <body>
 
 <div class="container">
+    
     <div class="top-bar">
-        <h1>NovaSuite</h1>
+        <div class="logo-area">
+            <h1>NovaSuite</h1>
+            <p>The Ultimate Global Multi-Hub Platform</p>
+        </div>
         <div>
-            <span class="global-text">🌐 Language: </span>
-            <div id="google_translate_element" style="display:inline-block; vertical-align:middle;"></div>
+            <div id="google_translate_element"></div>
         </div>
     </div>
 
-    <div class="web-hub">
-        <h3>🌐 Global Web Hub / כל האתרים במקום אחד</h3>
-        <div class="links-grid">
-            <a href="https://www.google.com" target="_blank" class="hub-link">Google</a>
-            <a href="https://www.tradingview.com" target="_blank" class="hub-link">TradingView Graphs</a>
-            <a href="https://www.youtube.com" target="_blank" class="hub-link">YouTube Global</a>
-            <a href="https://www.binance.com" target="_blank" class="hub-link">Binance Crypto</a>
-            <a href="https://www.topstep.com" target="_blank" class="hub-link">Topstep Platform</a>
+    <div class="hub-section">
+        <div class="row-title">🤖 Shura 1: AI & Intelligence Power / כלי בינה מלאכותית חזקים</div>
+        <div class="links-row">
+            <a href="https://www.google.com" target="_blank" class="hub-card">
+                <span class="badge">Search Engine</span>
+                <h4>Google Global</h4>
+                <p>The core gate to find any data, website, or research across the internet.</p>
+            </a>
+            <a href="https://chat.openai.com" target="_blank" class="hub-card">
+                <span class="badge">AI Chat</span>
+                <h4>ChatGPT Portal</h4>
+                <p>Direct access to generate text, write professional code, and solve problems.</p>
+            </a>
+            <a href="https://www.midjourney.com" target="_blank" class="hub-card">
+                <span class="badge">AI Design</span>
+                <h4>Midjourney / Images</h4>
+                <p>Create hyper-realistic designs and high-end tech graphics automatically.</p>
+            </a>
         </div>
     </div>
 
-    <div class="main-layout">
-        <div class="card">
-            <h2>🤖 Advanced AI Assistant - Nova Prompt</h2>
-            <div class="chat-container">
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message system">Hello! I am your global AI engine. Enter any command to analyze or manage your workspaces.</div>
-                </div>
-                <div class="chat-input-area">
-                    <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
-                    <button onclick="sendMessage()">Send</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>📊 Smart Strategy & Risk Calculator</h2>
-            <div class="calc-group">
-                <label>Account Balance ($) / סכום חשבון:</label>
-                <input type="number" id="accBalance" value="50000">
-            </div>
-            <div class="calc-group">
-                <label>Max Risk Allowed (%) / אחוז סיכון מקסימלי:</label>
-                <input type="number" id="riskPercent" value="1" step="0.1">
-            </div>
-            <div class="calc-group">
-                <label>Target Profit Ratio (X times risk) / יעד רווח:</label>
-                <input type="number" id="rewardRatio" value="2">
-            </div>
-            <button class="calc-btn" onclick="calculateMatrix()">Run AI Simulation / הפעל סימולציה</button>
-
-            <div class="calc-result" id="calcResult">
-                <h4 style="margin-top:0; color:var(--success);">Simulation Complete / תוצאות הסימולציה:</h4>
-                <p>• Max Risk Amount: <strong id="resRisk"></strong></p>
-                <p>• Target Profit Goal: <strong id="resProfit"></strong></p>
-                <p>• Recommended Safe Size: <strong id="resSize">Dynamic Safe Mode Active</strong></p>
-            </div>
+    <div class="hub-section">
+        <div class="row-title">💰 Shura 2: Income & Finance Channels / עשיית כסף ומסחר עולמי</div>
+        <div class="links-row">
+            <a href="https://www.tradingview.com" target="_blank" class="hub-card">
+                <span class="badge money">Charts Matrix</span>
+                <h4>TradingView Terminal</h4>
+                <p>Live global marketplace metrics and candle charts for execution tracking.</p>
+            </a>
+            <a href="https://www.topstep.com" target="_blank" class="hub-card">
+                <span class="badge money">Funding Firm</span>
+                <h4>Topstep Portal</h4>
+                <p>Pass evaluation metrics to access professional funded trading capital models.</p>
+            </a>
+            <a href="https://www.binance.com" target="_blank" class="hub-card">
+                <span class="badge money">Crypto Nodes</span>
+                <h4>Binance Network</h4>
+                <p>Manage international assets, digital P2P transfers, and secure wallets.</p>
+            </a>
+            <a href="https://www.fiverr.com" target="_blank" class="hub-card">
+                <span class="badge money">Freelance Business</span>
+                <h4>Fiverr Global</h4>
+                <p>Offer your digital skills, automations, and tech designs to buyers worldwide.</p>
+            </a>
         </div>
     </div>
+
+    <div class="hub-section">
+        <div class="row-title">📚 Shura 3: Global Knowledge & Skills / לימוד, שפות ותרגול עולמי</div>
+        <div class="links-row">
+            <a href="https://www.youtube.com" target="_blank" class="hub-card">
+                <span class="badge">Video Network</span>
+                <h4>YouTube Academy</h4>
+                <p>Watch step-by-step guides, fox news streams, and digital growth tutorials.</p>
+            </a>
+            <a href="https://www.duolingo.com" target="_blank" class="hub-card">
+                <span class="badge">Languages</span>
+                <h4>Duolingo Mastery</h4>
+                <p>Train your vocabulary daily to speak English, French, and world languages.</p>
+            </a>
+            <a href="https://github.com" target="_blank" class="hub-card">
+                <span class="badge">Development</span>
+                <h4>GitHub Systems</h4>
+                <p>The control center where your custom system code is securely stored for free.</p>
+            </a>
+        </div>
+    </div>
+
 </div>
 
 <script type="text/javascript">
@@ -332,48 +231,5 @@ function googleTranslateElementInit() {
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<script>
-function calculateMatrix() {
-    const balance = parseFloat(document.getElementById('accBalance').value);
-    const risk = parseFloat(document.getElementById('riskPercent').value);
-    const ratio = parseFloat(document.getElementById('rewardRatio').value);
-
-    if (isNaN(balance) || isNaN(risk) || isNaN(ratio)) return;
-
-    const riskAmount = balance * (risk / 100);
-    const profitGoal = riskAmount * ratio;
-
-    document.getElementById('resRisk').innerText = "$" + riskAmount.toFixed(2);
-    document.getElementById('resProfit').innerText = "$" + profitGoal.toFixed(2);
-    document.getElementById('calcResult').style.display = 'block';
-}
-
-function sendMessage() {
-    const input = document.getElementById('userInput');
-    const messageText = input.value.trim();
-    if (messageText === '') return;
-
-    const chatMessages = document.getElementById('chatMessages');
-
-    const userMessage = document.createElement('div');
-    userMessage.className = 'message user';
-    userMessage.innerText = messageText;
-    chatMessages.appendChild(userMessage);
-
-    input.value = '';
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-
-    setTimeout(() => {
-        const systemMessage = document.createElement('div');
-        systemMessage.className = 'message system';
-        systemMessage.innerText = "System Matrix Updated. Global nodes are fully synchronized.";
-        chatMessages.appendChild(systemMessage);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }, 1000);
-}
-
-function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-        sendMessage();
-    }
-}
+</body>
+</html>
