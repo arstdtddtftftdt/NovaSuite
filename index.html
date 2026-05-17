@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaSuite - The Ultimate Ultimate-Hub</title>
+    <title>NovaSuite - Ultimate Global Control Matrix</title>
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -23,6 +23,7 @@
             color: var(--text-main);
             margin: 0;
             padding: 20px;
+            direction: ltr !important;
         }
 
         .container {
@@ -30,12 +31,13 @@
             margin: 0 auto;
         }
 
+        /* Professional Header & Language Selector */
         .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
-            padding: 15px 25px;
+            padding: 18px 25px;
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
@@ -44,10 +46,42 @@
         .logo-area h1 {
             margin: 0;
             color: var(--primary);
-            font-size: 2rem;
+            font-size: 1.8rem;
             letter-spacing: 1px;
+            font-weight: 800;
         }
 
+        .lang-selector-bar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--primary);
+            background-color: rgba(139, 92, 246, 0.1);
+        }
+
+        /* Hide Default Google Widget but keep functionality */
+        #google_translate_element {
+            display: none !important;
+        }
+        .goog-te-banner-frame, .skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+
+        /* Layout Architecture */
         .main-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -68,27 +102,27 @@
             border-radius: 16px;
             padding: 25px;
             border: 1px solid var(--border);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
         }
 
         .card h2 {
             margin-top: 0;
             margin-bottom: 20px;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: var(--primary);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        /* Input Controls Global */
+        /* Input Elements */
         .input-group-custom {
             display: flex;
             gap: 10px;
             margin-bottom: 15px;
         }
 
-        .input-group-custom input, .input-group-custom select {
+        .input-group-custom input {
             flex: 1;
             background-color: var(--bg-main);
             border: 1px solid var(--border);
@@ -96,13 +130,14 @@
             border-radius: 8px;
             color: var(--text-main);
             outline: none;
+            font-size: 0.95rem;
         }
 
         .btn-custom {
             background-color: var(--primary);
             color: white;
             border: none;
-            padding: 0 20px;
+            padding: 0 22px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
@@ -111,12 +146,11 @@
 
         .btn-custom:hover { background-color: var(--primary-hover); }
         .btn-success { background-color: var(--success); }
-        .btn-success:hover { opacity: 0.9; }
 
-        /* Dynamic Grid for Unlimited Future Tools */
+        /* Multi-Hub Dynamic Grid */
         .dynamic-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
@@ -125,7 +159,7 @@
             background-color: var(--bg-main);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 15px;
+            padding: 18px;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -133,7 +167,7 @@
         }
 
         .dynamic-item h4 { margin: 0; color: var(--primary); font-size: 1.1rem; }
-        .dynamic-item p { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
+        .dynamic-item p { margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
         .dynamic-item a {
             margin-top: auto;
             color: var(--success);
@@ -144,48 +178,46 @@
 
         .delete-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 12px;
+            right: 12px;
             background: none;
             border: none;
             color: var(--danger);
             cursor: pointer;
             font-weight: bold;
+            font-size: 1rem;
         }
 
-        /* To-Do Elements */
+        /* Objective Lists */
         .todo-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
         .todo-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background-color: var(--bg-main);
-            padding: 12px 15px;
+            padding: 14px 18px;
             border-radius: 8px;
             border: 1px solid var(--border);
         }
         .todo-item.completed span { text-decoration: line-through; color: var(--text-muted); }
+        .todo-item span { cursor: pointer; }
 
-        /* AI Chat Interface */
+        /* AI Panel */
         .chat-container { display: flex; flex-direction: column; height: 280px; background-color: var(--bg-main); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
         .chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
         .message { padding: 10px 14px; border-radius: 8px; max-width: 80%; font-size: 0.95rem; background-color: var(--border); color: var(--text-main); align-self: flex-start; }
         .message.user { background-color: var(--primary); color: white; align-self: flex-end; }
 
-        /* Calculator Components */
+        /* Risk Calculator Layout */
         .calc-group { margin-bottom: 12px; }
-        .calc-group label { display: block; margin-bottom: 4px; font-size: 0.85rem; color: var(--text-muted); }
-        .calc-group input { width: 100%; background-color: var(--bg-main); border: 1px solid var(--border); padding: 10px; border-radius: 8px; color: var(--text-main); box-sizing: border-box; outline: none; }
+        .calc-group label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-muted); }
+        .calc-group input { width: 100%; background-color: var(--bg-main); border: 1px solid var(--border); padding: 11px; border-radius: 8px; color: var(--text-main); box-sizing: border-box; outline: none; }
         .calc-result { margin-top: 15px; padding: 15px; background-color: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; display: none; }
-
-        /* Google Translate Extension */
-        .goog-te-gadget-simple { background-color: var(--bg-main) !important; border: 1px solid var(--border) !important; padding: 6px 10px !important; border-radius: 6px !important; }
-        .goog-te-gadget-simple span { color: var(--text-main) !important; }
-        .goog-te-banner-frame { display: none !important; }
-        body { top: 0px !important; }
     </style>
 </head>
 <body>
+
+<div id="google_translate_element"></div>
 
 <div class="container">
     
@@ -193,29 +225,31 @@
         <div class="logo-area">
             <h1>NovaSuite Matrix</h1>
         </div>
-        <div>
-            <div id="google_translate_element"></div>
+        <div class="lang-selector-bar">
+            <button class="lang-btn" onclick="translateTo('en')">English</button>
+            <button class="lang-btn" onclick="translateTo('iw')">עברית</button>
+            <button class="lang-btn" onclick="translateTo('ar')">العربية</button>
+            <button class="lang-btn" onclick="translateTo('fr')">Français</button>
         </div>
     </div>
 
     <div class="card full-width" style="margin-bottom:25px;">
-        <h2>🌐 Custom Matrix Hub / מחולל הכלים והאתרים הרשמי שלך</h2>
-        <p style="color:var(--text-muted); margin-top:0; font-size:0.9rem;">Create and add any website, hidden platform, or custom workspace directly into your system layout below instantly.</p>
+        <h2>🌐 Custom Matrix Hub</h2>
         <div class="input-group-custom">
-            <input type="text" id="toolName" placeholder="Tool / Website Name (e.g., Target Platform)...">
-            <input type="text" id="toolUrl" placeholder="URL Link (e.g., https://site.com)...">
-            <input type="text" id="toolDesc" placeholder="Brief Description / Purpose...">
-            <button class="btn-custom btn-success" onclick="createDynamicTool()">Deploy Into System</button>
+            <input type="text" id="toolName" placeholder="Platform Name...">
+            <input type="text" id="toolUrl" placeholder="URL Target (e.g., domain.com)...">
+            <input type="text" id="toolDesc" placeholder="Functional Description...">
+            <button class="btn-custom btn-success" onclick="createDynamicTool()">Deploy Module</button>
         </div>
         <div class="dynamic-grid" id="dynamicToolsContainer">
             <div class="dynamic-item">
-                <h4>Google Engine</h4>
-                <p>Global database core network lookup access.</p>
+                <h4>Google Global Engine</h4>
+                <p>Primary decentralized open-source cloud database Lookup network portal.</p>
                 <a href="https://www.google.com" target="_blank">Launch System →</a>
             </div>
             <div class="dynamic-item">
                 <h4>YouTube Academy</h4>
-                <p>Stream complex technological data and global updates.</p>
+                <p>Streaming interface for high-end digital information and system tracking.</p>
                 <a href="https://www.youtube.com" target="_blank">Launch System →</a>
             </div>
         </div>
@@ -224,42 +258,42 @@
     <div class="main-layout">
         
         <div class="card full-width">
-            <h2>📝 Private Objectives & Execution Board / ניהול משימות ויעדים אישיים</h2>
+            <h2>📝 Objectives & Execution Board</h2>
             <div class="input-group-custom">
-                <input type="text" id="todoInput" placeholder="Enter custom target vector description...">
-                <button class="btn-custom" onclick="addTodo()">Add Target</button>
+                <input type="text" id="todoInput" placeholder="Enter custom system target vector description...">
+                <button class="btn-custom" onclick="addTodo()">Add Vector</button>
             </div>
             <ul class="todo-list" id="todoList">
-                <li class="todo-item"><span>Execute vocabulary optimization modules</span><button class="delete-btn" onclick="this.parentElement.remove()">X</button></li>
+                <li class="todo-item"><span>Execute vocabulary optimization models</span><button class="delete-btn" onclick="this.parentElement.remove()">X</button></li>
                 <li class="todo-item"><span>Review system matrix balances</span><button class="delete-btn" onclick="this.parentElement.remove()">X</button></li>
             </ul>
         </div>
 
         <div class="card">
-            <h2>🤖 Nova Personal Assistant / עוזר אישי לפיתוח ועבודה</h2>
+            <h2>🤖 Nova Personal Assistant</h2>
             <div class="chat-container">
                 <div class="chat-messages" id="chatMessages">
-                    <div class="message system">NovaSuite Global Engine Online. Enter parameters or talk to the system directly. All systems clear.</div>
+                    <div class="message system">NovaSuite Global Engine Online. English system terminal fully active. Ask anything.</div>
                 </div>
-                <div class="chat-input-area">
-                    <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+                <div class="chat-input-area" style="display:flex; padding:10px; gap:10px; background-color:var(--bg-card); border-top:1px solid var(--border);">
+                    <input type="text" id="userInput" style="flex:1; background-color:var(--bg-main); border:1px solid var(--border); padding:10px; border-radius:8px; color:var(--text-main); outline:none;" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
                     <button class="btn-custom" onclick="sendMessage()">Send</button>
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <h2>📊 Strategy & Capital Simulator / מחשבון ניהול סיכונים חכם</h2>
+            <h2>📊 Strategy & Capital Simulator</h2>
             <div class="calc-group">
-                <label>Target Capital Allocation ($):</label>
+                <label>Target Account Allocation Size ($):</label>
                 <input type="number" id="accBalance" value="50000">
             </div>
             <div class="calc-group">
-                <label>Risk Parameter Maximum Percent (%):</label>
+                <label>Maximum Allowed Risk Parameter (%):</label>
                 <input type="number" id="riskPercent" value="1" step="0.1">
             </div>
             <div class="calc-group">
-                <label>Reward Ratio Target Multiplier:</label>
+                <label>Reward Multiplier Profit Target Vector:</label>
                 <input type="number" id="rewardRatio" value="2">
             </div>
             <button class="btn-custom btn-success" style="width:100%; padding:12px;" onclick="calculateMatrix()">Execute System Simulation</button>
@@ -287,6 +321,15 @@ function googleTranslateElementInit() {
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
+// Professional Language Switching Logic Matrix
+function translateTo(langCode) {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+        select.value = langCode;
+        select.dispatchEvent(new Event('change'));
+    }
+}
+
 // Dynamic System Tool Matrix Creation Engine
 function createDynamicTool() {
     const name = document.getElementById('toolName').value.trim();
@@ -294,24 +337,18 @@ function createDynamicTool() {
     const desc = document.getElementById('toolDesc').value.trim();
 
     if(name === '' || url === '') return;
-
-    if (!/^https?:\/\//i.test(url)) {
-        url = 'https://' + url;
-    }
+    if (!/^https?:\/\//i.test(url)) { url = 'https://' + url; }
 
     const container = document.getElementById('dynamicToolsContainer');
     const div = document.createElement('div');
     div.className = 'dynamic-item';
-
     div.innerHTML = `
         <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
         <h4>${name}</h4>
         <p>${desc === '' ? 'Custom system integrated link module.' : desc}</p>
         <a href="${url}" target="_blank">Launch System →</a>
     `;
-
     container.appendChild(div);
-
     document.getElementById('toolName').value = '';
     document.getElementById('toolUrl').value = '';
     document.getElementById('toolDesc').value = '';
@@ -325,7 +362,6 @@ function addTodo() {
 
     const li = document.createElement('li');
     li.className = 'todo-item';
-    
     const span = document.createElement('span');
     span.innerText = text;
     li.appendChild(span);
@@ -348,4 +384,10 @@ function calculateMatrix() {
     const risk = parseFloat(document.getElementById('riskPercent').value);
     const ratio = parseFloat(document.getElementById('rewardRatio').value);
 
-    if (isNaN(balance
+    if (isNaN(balance) || isNaN(risk) || isNaN(ratio)) return;
+
+    const riskAmount = balance * (risk / 100);
+    const profitGoal = riskAmount * ratio;
+
+    document.getElementById('resRisk').innerText = "$" + riskAmount.toFixed(2);
+    document.getElementById('resProfit').innerText = "$"
