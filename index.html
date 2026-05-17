@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaSuite - Private Workspace</title>
+    <title>NovaSuite - The Ultimate Ultimate-Hub</title>
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -30,7 +30,6 @@
             margin: 0 auto;
         }
 
-        /* Top Bar with Google Translate */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -82,14 +81,14 @@
             gap: 10px;
         }
 
-        /* To-Do List Styling */
-        .todo-input-area {
+        /* Input Controls Global */
+        .input-group-custom {
             display: flex;
             gap: 10px;
             margin-bottom: 15px;
         }
 
-        .todo-input-area input {
+        .input-group-custom input, .input-group-custom select {
             flex: 1;
             background-color: var(--bg-main);
             border: 1px solid var(--border);
@@ -99,7 +98,7 @@
             outline: none;
         }
 
-        .todo-input-area button {
+        .btn-custom {
             background-color: var(--primary);
             color: white;
             border: none;
@@ -107,17 +106,55 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            transition: background 0.2s;
         }
 
-        .todo-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .btn-custom:hover { background-color: var(--primary-hover); }
+        .btn-success { background-color: var(--success); }
+        .btn-success:hover { opacity: 0.9; }
+
+        /* Dynamic Grid for Unlimited Future Tools */
+        .dynamic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .dynamic-item {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            position: relative;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
+        .dynamic-item h4 { margin: 0; color: var(--primary); font-size: 1.1rem; }
+        .dynamic-item p { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
+        .dynamic-item a {
+            margin-top: auto;
+            color: var(--success);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* To-Do Elements */
+        .todo-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
         .todo-item {
             display: flex;
             justify-content: space-between;
@@ -127,135 +164,22 @@
             border-radius: 8px;
             border: 1px solid var(--border);
         }
-
-        .todo-item.completed span {
-            text-decoration: line-through;
-            color: var(--text-muted);
-        }
-
-        .todo-item button {
-            background-color: transparent;
-            border: none;
-            color: var(--danger);
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        /* Calculator Styling */
-        .calc-group {
-            margin-bottom: 15px;
-        }
-
-        .calc-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .calc-group input {
-            width: 100%;
-            background-color: var(--bg-main);
-            border: 1px solid var(--border);
-            padding: 10px;
-            border-radius: 8px;
-            color: var(--text-main);
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        .calc-btn {
-            width: 100%;
-            background-color: var(--success);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        .calc-result {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: var(--bg-main);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            display: none;
-        }
+        .todo-item.completed span { text-decoration: line-through; color: var(--text-muted); }
 
         /* AI Chat Interface */
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            height: 300px;
-            background-color: var(--bg-main);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
+        .chat-container { display: flex; flex-direction: column; height: 280px; background-color: var(--bg-main); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
+        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .message { padding: 10px 14px; border-radius: 8px; max-width: 80%; font-size: 0.95rem; background-color: var(--border); color: var(--text-main); align-self: flex-start; }
+        .message.user { background-color: var(--primary); color: white; align-self: flex-end; }
 
-        .chat-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        /* Calculator Components */
+        .calc-group { margin-bottom: 12px; }
+        .calc-group label { display: block; margin-bottom: 4px; font-size: 0.85rem; color: var(--text-muted); }
+        .calc-group input { width: 100%; background-color: var(--bg-main); border: 1px solid var(--border); padding: 10px; border-radius: 8px; color: var(--text-main); box-sizing: border-box; outline: none; }
+        .calc-result { margin-top: 15px; padding: 15px; background-color: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; display: none; }
 
-        .message {
-            padding: 10px 14px;
-            border-radius: 8px;
-            max-width: 80%;
-            font-size: 0.95rem;
-            background-color: var(--border);
-            color: var(--text-main);
-            align-self: flex-start;
-        }
-
-        .message.user {
-            background-color: var(--primary);
-            color: white;
-            align-self: flex-end;
-        }
-
-        .chat-input-area {
-            display: flex;
-            padding: 10px;
-            background-color: var(--bg-card);
-            border-top: 1px solid var(--border);
-            gap: 10px;
-        }
-
-        .chat-input-area input {
-            flex: 1;
-            background-color: var(--bg-main);
-            border: 1px solid var(--border);
-            padding: 10px;
-            border-radius: 8px;
-            color: var(--text-main);
-            outline: none;
-        }
-
-        .chat-input-area button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        /* Google Translate Customization */
-        .goog-te-gadget-simple {
-            background-color: var(--bg-main) !important;
-            border: 1px solid var(--border) !important;
-            padding: 6px 10px !important;
-            border-radius: 6px !important;
-        }
+        /* Google Translate Extension */
+        .goog-te-gadget-simple { background-color: var(--bg-main) !important; border: 1px solid var(--border) !important; padding: 6px 10px !important; border-radius: 6px !important; }
         .goog-te-gadget-simple span { color: var(--text-main) !important; }
         .goog-te-banner-frame { display: none !important; }
         body { top: 0px !important; }
@@ -267,30 +191,47 @@
     
     <div class="top-bar">
         <div class="logo-area">
-            <h1>NovaSuite Hub</h1>
+            <h1>NovaSuite Matrix</h1>
         </div>
         <div>
             <div id="google_translate_element"></div>
         </div>
     </div>
 
+    <div class="card full-width" style="margin-bottom:25px;">
+        <h2>🌐 Custom Matrix Hub / מחולל הכלים והאתרים הרשמי שלך</h2>
+        <p style="color:var(--text-muted); margin-top:0; font-size:0.9rem;">Create and add any website, hidden platform, or custom workspace directly into your system layout below instantly.</p>
+        <div class="input-group-custom">
+            <input type="text" id="toolName" placeholder="Tool / Website Name (e.g., Target Platform)...">
+            <input type="text" id="toolUrl" placeholder="URL Link (e.g., https://site.com)...">
+            <input type="text" id="toolDesc" placeholder="Brief Description / Purpose...">
+            <button class="btn-custom btn-success" onclick="createDynamicTool()">Deploy Into System</button>
+        </div>
+        <div class="dynamic-grid" id="dynamicToolsContainer">
+            <div class="dynamic-item">
+                <h4>Google Engine</h4>
+                <p>Global database core network lookup access.</p>
+                <a href="https://www.google.com" target="_blank">Launch System →</a>
+            </div>
+            <div class="dynamic-item">
+                <h4>YouTube Academy</h4>
+                <p>Stream complex technological data and global updates.</p>
+                <a href="https://www.youtube.com" target="_blank">Launch System →</a>
+            </div>
+        </div>
+    </div>
+
     <div class="main-layout">
         
         <div class="card full-width">
-            <h2>📝 My Private Work & Target Board / לוח משימות ויעדים אישיים</h2>
-            <div class="todo-input-area">
-                <input type="text" id="todoInput" placeholder="Add a new goal or daily task...">
-                <button onclick="addTodo()">Add Task</button>
+            <h2>📝 Private Objectives & Execution Board / ניהול משימות ויעדים אישיים</h2>
+            <div class="input-group-custom">
+                <input type="text" id="todoInput" placeholder="Enter custom target vector description...">
+                <button class="btn-custom" onclick="addTodo()">Add Target</button>
             </div>
             <ul class="todo-list" id="todoList">
-                <li class="todo-item">
-                    <span>Complete daily language training vocabulary</span>
-                    <button onclick="this.parentElement.remove()">X</button>
-                </li>
-                <li class="todo-item">
-                    <span>Review daily system balance and settings</span>
-                    <button onclick="this.parentElement.remove()">X</button>
-                </li>
+                <li class="todo-item"><span>Execute vocabulary optimization modules</span><button class="delete-btn" onclick="this.parentElement.remove()">X</button></li>
+                <li class="todo-item"><span>Review system matrix balances</span><button class="delete-btn" onclick="this.parentElement.remove()">X</button></li>
             </ul>
         </div>
 
@@ -298,8 +239,113 @@
             <h2>🤖 Nova Personal Assistant / עוזר אישי לפיתוח ועבודה</h2>
             <div class="chat-container">
                 <div class="chat-messages" id="chatMessages">
-                    <div class="message system">Hello! This is your private workspace. Ask me to help with calculations, workflow advice, or language practice.</div>
+                    <div class="message system">NovaSuite Global Engine Online. Enter parameters or talk to the system directly. All systems clear.</div>
                 </div>
                 <div class="chat-input-area">
                     <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
-                    <button onclick="sendMessage()">Send</button>
+                    <button class="btn-custom" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📊 Strategy & Capital Simulator / מחשבון ניהול סיכונים חכם</h2>
+            <div class="calc-group">
+                <label>Target Capital Allocation ($):</label>
+                <input type="number" id="accBalance" value="50000">
+            </div>
+            <div class="calc-group">
+                <label>Risk Parameter Maximum Percent (%):</label>
+                <input type="number" id="riskPercent" value="1" step="0.1">
+            </div>
+            <div class="calc-group">
+                <label>Reward Ratio Target Multiplier:</label>
+                <input type="number" id="rewardRatio" value="2">
+            </div>
+            <button class="btn-custom btn-success" style="width:100%; padding:12px;" onclick="calculateMatrix()">Execute System Simulation</button>
+
+            <div class="calc-result" id="calcResult">
+                <h4 style="margin-top:0; color:var(--success);">Simulation Matrices Calculated:</h4>
+                <p>• Max Risk Allocation: <strong id="resRisk"></strong></p>
+                <p>• Targeted Profit Vector: <strong id="resProfit"></strong></p>
+                <p>• Status Protection: <strong style="color:var(--success);">Dynamic Guard On</strong></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+    }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+// Dynamic System Tool Matrix Creation Engine
+function createDynamicTool() {
+    const name = document.getElementById('toolName').value.trim();
+    let url = document.getElementById('toolUrl').value.trim();
+    const desc = document.getElementById('toolDesc').value.trim();
+
+    if(name === '' || url === '') return;
+
+    if (!/^https?:\/\//i.test(url)) {
+        url = 'https://' + url;
+    }
+
+    const container = document.getElementById('dynamicToolsContainer');
+    const div = document.createElement('div');
+    div.className = 'dynamic-item';
+
+    div.innerHTML = `
+        <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
+        <h4>${name}</h4>
+        <p>${desc === '' ? 'Custom system integrated link module.' : desc}</p>
+        <a href="${url}" target="_blank">Launch System →</a>
+    `;
+
+    container.appendChild(div);
+
+    document.getElementById('toolName').value = '';
+    document.getElementById('toolUrl').value = '';
+    document.getElementById('toolDesc').value = '';
+}
+
+// To-Do Tracking Architecture
+function addTodo() {
+    const input = document.getElementById('todoInput');
+    const text = input.value.trim();
+    if(text === '') return;
+
+    const li = document.createElement('li');
+    li.className = 'todo-item';
+    
+    const span = document.createElement('span');
+    span.innerText = text;
+    li.appendChild(span);
+
+    span.addEventListener('click', function() { li.classList.toggle('completed'); });
+
+    const btn = document.createElement('button');
+    btn.className = 'delete-btn';
+    btn.innerText = 'X';
+    btn.onclick = function() { li.remove(); };
+    li.appendChild(btn);
+
+    document.getElementById('todoList').appendChild(li);
+    input.value = '';
+}
+
+// Risk Matrix Simulation Calculation Formula
+function calculateMatrix() {
+    const balance = parseFloat(document.getElementById('accBalance').value);
+    const risk = parseFloat(document.getElementById('riskPercent').value);
+    const ratio = parseFloat(document.getElementById('rewardRatio').value);
+
+    if (isNaN(balance
